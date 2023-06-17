@@ -63,7 +63,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
     private static final DataParameter<Boolean> PRESS_BUTTON = EntityDataManager.createKey(Sahonachelys.class, DataSerializers.BOOLEAN);
 
     private int isDigging;
-    private int mossTime = 0;
+    private int mossTime = 0, buttonPressAnimationCooldown = 0;
 
     public Sahonachelys(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -135,6 +135,12 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
                     mossTime = 0;
                     this.setMoss(Math.min(10, this.getMoss() + 1));
                 }
+            }
+            if (this.buttonPressAnimationCooldown == 0 && isPressingButton()){
+                setPressingButton(false);
+            }
+            if (this.buttonPressAnimationCooldown > 0){
+                this.buttonPressAnimationCooldown--;
             }
         }
     }
@@ -336,6 +342,11 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         Vector3d prevPosVector = new Vector3d(this.prevPosX, this.prevPosY, this.prevPosZ);
+        if (isPressingButton()){
+            System.out.println("button animaton should be played");
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("buttonpush", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
+            return PlayState.CONTINUE;
+        }
         if (this.isInWaterOrBubbleColumn()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("swim", ILoopType.EDefaultLoopTypes.LOOP));
             return PlayState.CONTINUE;
@@ -352,9 +363,6 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
             event.getController().markNeedsReload();
             event.getController().setAnimation(new AnimationBuilder().addAnimation("attack"));
             this.isSwingInProgress = false;
-        } else if (this.isPressingButton()) {
-            //TODO need to fix this don't know why it wont work
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("buttonpush", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
         }
         return PlayState.CONTINUE;
     }
@@ -466,23 +474,28 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
         }
 
         @Override
+        public boolean shouldContinueExecuting() {
+            return this.destinationBlock != null && sahonachelys.world.getBlockState(destinationBlock).getBlock() instanceof AbstractButtonBlock;
+        }
+
+        @Override
         public boolean shouldExecute() {
             if (this.timeUntilNextPress > 0) {
                 this.timeUntilNextPress--;
                 return false;
             }
 
-            // Comprueba si hay botones dentro del radio de 10 bloques
+            // find all buttons in a 10 by 10 square
             findButtons();
             if (!buttonPositions.isEmpty()) {
-                // Selecciona un botón al azar de la lista
+                //select a random element from the list
                 int index = random.nextInt(buttonPositions.size());
                 this.destinationBlock = buttonPositions.get(index);
                 sahonachelys.setPressingButton(true);
                 return true;
             }
 
-            this.timeUntilNextPress = 200; // Espera 10 segundos antes de buscar otro botón
+            this.timeUntilNextPress = 200; // 20 seconds in ticks
             return false;
         }
 
@@ -490,20 +503,19 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
         public void tick() {
             if (this.destinationBlock != null) {
                 double distanceSq = this.sahonachelys.getDistanceSq(this.destinationBlock.getX() + 0.5, this.destinationBlock.getY() + 0.5, this.destinationBlock.getZ() + 0.5);
-                if (distanceSq <= 2.0) {
-                    Direction entityFacing = this.sahonachelys.getHorizontalFacing();
-                    Direction buttonFacing = getButtonFacing(this.destinationBlock);
-                    if (entityFacing == buttonFacing) {
-                        BlockState buttonState = this.sahonachelys.world.getBlockState(this.destinationBlock);
-                        AbstractButtonBlock button = (AbstractButtonBlock) buttonState.getBlock();
+                if (distanceSq <= 1.5) {
+                    sahonachelys.getLookController().setLookPosition(Vector3d.copy(this.destinationBlock));
+                    System.out.println("correct disntance");
+                    BlockState buttonState = this.sahonachelys.world.getBlockState(this.destinationBlock);
+                    AbstractButtonBlock button = (AbstractButtonBlock) buttonState.getBlock();
 
-                        // Presiona el botón cambiando el estado del bloque
-                        button.powerBlock(buttonState, this.sahonachelys.world, this.destinationBlock);
+                    // pressing of the button
+                    button.powerBlock(buttonState, this.sahonachelys.world, this.destinationBlock);
 
-                        this.destinationBlock = null;
-                        this.timeUntilNextPress = 200; // Espera 10 segundos antes de buscar otro botón
-                        sahonachelys.setPressingButton(false);
-                    }
+                    this.destinationBlock = null;
+                    this.timeUntilNextPress = 200; // 20 seconds in ticks
+                    sahonachelys.setPressingButton(false);
+                    sahonachelys.buttonPressAnimationCooldown = 15; // animation goes 14.4 ticks so i rounded it up to 15
                 } else {
                     this.sahonachelys.getNavigator().tryMoveToXYZ(this.destinationBlock.getX() + 0.5, this.destinationBlock.getY() + 0.5, this.destinationBlock.getZ() + 0.5, this.movementSpeed);
                 }
@@ -533,6 +545,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
                 }
             }
         }
+
         private Direction getButtonFacing(BlockPos buttonPos) {
             BlockState blockState = this.sahonachelys.world.getBlockState(buttonPos);
             if (blockState.getBlock() instanceof AbstractButtonBlock) {
