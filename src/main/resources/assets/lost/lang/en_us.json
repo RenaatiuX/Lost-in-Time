@@ -1,0 +1,26 @@
+{
+  "itemGroup.lostGroup": "Lost in Time",
+
+  "item.lost.sahonachelys_spawn_egg": "Sahonachelys Spawn Egg",
+  "item.lost.dakosaurus_spawn_egg": "Dakosaurus Spawn Egg",
+  "item.lost.diplomoceras_spawn_egg": "Diplomoceras Spawn Egg",
+  "item.lost.hypsocormus_spawn_egg": "Hypsocormus Spawn Egg",
+  "item.lost.tepexichthys_spawn_egg": "Tepexichthys Spawn Egg",
+  "item.lost.pelecanimimus_spawn_egg": "Pelecanimimus Spawn Egg",
+    "item.lost.mirarce_spawn_egg": "Mirarce Spawn Egg",
+  "item.lost.dakosaurus_tooth": "Dakosaurus Tooth",
+  "item.lost.hypsocormus_bucket": "Bucket of Hypsocormus",
+  "item.lost.tepexichthys_bucket": "Bucket of Tepexichthys",
+
+  "block.lost.mud": "Mud",
+  "block.lost.tranquilizer": "Tranquilizer",
+  "block.lost.diplomoceras_shell": "Diplomoceras Shell",
+
+  "entity.lost.sahonachelys": "Sahonachelys",
+  "entity.lost.dakosaurus": "Dakosaurus",
+  "entity.lost.diplomoceras": "Diplomoceras",
+  "entity.lost.hypsocormus": "Hypsocormus",
+  "entity.lost.tepexichthys": "Tepexichthys",
+  "entity.lost.pelecanimimus": "Pelecanimimus",
+  "entity.lost.mirarce": "Mirarce"
+}

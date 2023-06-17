@@ -1,0 +1,90 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "Apertotemporalis",
+					"pivot": [0, 6, 6]
+				},
+				{
+					"name": "Torso",
+					"parent": "Apertotemporalis",
+					"pivot": [0, 6, 6],
+					"cubes": [
+						{"origin": [-4.5, 0, -5], "size": [9, 6, 13], "uv": [0, 0]},
+						{"origin": [-4.5, 4, -4], "size": [9, 4, 12], "inflate": 0.025, "uv": [0, 42]}
+					]
+				},
+				{
+					"name": "Neck",
+					"parent": "Torso",
+					"pivot": [0, 4, -5],
+					"cubes": [
+						{"origin": [-1.5, 1, -9], "size": [3, 3, 4], "uv": [0, 35]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Neck",
+					"pivot": [0, 4, -9],
+					"cubes": [
+						{"origin": [-3.525, 1, -14], "size": [7.05, 3, 5], "uv": [15, 20]},
+						{"origin": [-1.5, 2, -16], "size": [3, 2, 2], "uv": [0, 0]},
+						{"origin": [-3.55, -0.025, -9.975], "size": [7.1, 2, 2], "uv": [11, 34]}
+					]
+				},
+				{
+					"name": "Jaw",
+					"parent": "Head",
+					"pivot": [0, 1, -9],
+					"cubes": [
+						{"origin": [-3.525, 0, -14], "size": [7.05, 1, 5], "uv": [0, 28]},
+						{"origin": [-3.5, 1, -12], "size": [0, 3, 3], "uv": [31, 6]},
+						{"origin": [3.5, 1, -12], "size": [0, 3, 3], "uv": [31, 6], "mirror": true}
+					]
+				},
+				{
+					"name": "LeftArm",
+					"parent": "Torso",
+					"pivot": [4.5, 1, -5],
+					"cubes": [
+						{"origin": [4.5, 0, -6], "size": [6, 1, 5], "uv": [31, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "RightArm",
+					"parent": "Torso",
+					"pivot": [-4.5, 1, -5],
+					"cubes": [
+						{"origin": [-10.5, 0, -6], "size": [6, 1, 5], "uv": [31, 0]}
+					]
+				},
+				{
+					"name": "LeftLeg",
+					"parent": "Apertotemporalis",
+					"pivot": [4.5, 1, 7],
+					"cubes": [
+						{"origin": [3.5, 0.1, 6], "size": [4, 1, 4], "uv": [34, 19], "mirror": true}
+					]
+				},
+				{
+					"name": "RightLeg",
+					"parent": "Apertotemporalis",
+					"pivot": [-4.5, 1, 7],
+					"cubes": [
+						{"origin": [-7.5, 0.1, 6], "size": [4, 1, 4], "uv": [34, 19]}
+					]
+				}
+			]
+		}
+	]
+}

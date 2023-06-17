@@ -1,0 +1,117 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"swim": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"Torso": {
+					"rotation": {
+						"vector": ["math.sin((query.anim_time-.15)*360)*.5", "math.sin(query.anim_time*360)*5", "math.sin((query.anim_time-.25)*360)*-2"]
+					}
+				},
+				"TopFin": {
+					"rotation": {
+						"vector": [0, 0, "math.COS((query.anim_time-.1)*360)*-5"]
+					}
+				},
+				"BottomFin": {
+					"rotation": {
+						"vector": [0, 0, "math.COS((query.anim_time-.125)*360)*5"]
+					}
+				},
+				"Tail": {
+					"rotation": {
+						"vector": [0, "math.COS((query.anim_time-.05)*360)*-25", "math.COS((query.anim_time-.25)*360)*5"]
+					}
+				},
+				"RightFin": {
+					"rotation": {
+						"vector": ["math.sin((query.anim_time-.15)*360)*-3", "math.cos((query.anim_time-.35)*360)*10", 0]
+					}
+				},
+				"LeftFin": {
+					"rotation": {
+						"vector": ["math.sin((query.anim_time-.15)*360)*3", "math.cos((query.anim_time-.35)*360)*-10", 0]
+					}
+				}
+			}
+		},
+		"outofwater": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"Torso": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, -90]
+						},
+						"0.2": {
+							"vector": [-20, 0, -75]
+						},
+						"0.44": {
+							"vector": [-21.65836, 21.39095, -83.25026]
+						},
+						"0.68": {
+							"vector": [0.79258, -8.60614, -83.67586]
+						},
+						"0.88": {
+							"vector": [19.5559, -8.12894, -58.40697]
+						},
+						"1.04": {
+							"vector": [-2.41873, -15.18595, -61.00172]
+						},
+						"1.32": {
+							"vector": [-9.73003, 13.10967, -71.07466]
+						},
+						"1.48": {
+							"vector": [12.4622, -3.97417, -74.89496]
+						},
+						"1.76": {
+							"vector": [26.6303, 2.67474, -76.48415]
+						},
+						"2.0": {
+							"vector": [0, 0, -90]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [-2, -7.7, 0]
+						},
+						"0.24": {
+							"vector": [-2, -5.94, 0]
+						},
+						"0.4": {
+							"vector": [-2, -7.3, 0]
+						},
+						"0.68": {
+							"vector": [-2, -7.13, 0]
+						},
+						"0.8": {
+							"vector": [-3, -6.25, 0]
+						},
+						"0.92": {
+							"vector": [-2, -7.13, 0]
+						},
+						"1.12": {
+							"vector": [-2, -5.3, 0]
+						},
+						"1.4": {
+							"vector": [-2, -7.13, 0]
+						},
+						"1.52": {
+							"vector": [-3, -6.25, 0]
+						},
+						"1.64": {
+							"vector": [-2, -7.13, 0]
+						},
+						"2.0": {
+							"vector": [-2, -7.3, 0]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

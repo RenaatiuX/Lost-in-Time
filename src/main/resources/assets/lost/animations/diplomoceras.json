@@ -1,0 +1,76 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"swim": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"Diplomoceras": {
+					"rotation": {
+						"vector": [0, 0, "math.cos((query.anim_time-.3)*180)*1.5"]
+					},
+					"position": {
+						"vector": [0, "1+math.sin(query.anim_time*180)*.125*math.cos()", 0]
+					}
+				},
+				"TentaclePair1": {
+					"rotation": {
+						"vector": ["-15+math.cos((query.anim_time-.3)*180)*1.5", 0, "-1+math.sin(query.anim_time*180)*-1.5"]
+					},
+					"position": {
+						"vector": [-0.1, 0, 0]
+					}
+				},
+				"TentaclePair3": {
+					"rotation": {
+						"vector": ["-15+math.cos((query.anim_time-.3)*180)*1.5", 0, "-1+math.sin(query.anim_time*180)*-1.5"]
+					}
+				},
+				"TentaclePair2": {
+					"rotation": {
+						"vector": ["-15+math.cos((query.anim_time-.3)*180)*1.5", 0, "-1+math.sin(query.anim_time*180)*-1.5"]
+					},
+					"position": {
+						"vector": [0.1, 0, 0]
+					}
+				}
+			}
+		},
+		"beached": {
+			"loop": true,
+			"bones": {
+				"Diplomoceras": {
+					"position": {
+						"vector": [0, 1, 0]
+					}
+				},
+				"TentaclePair1": {
+					"rotation": {
+						"vector": [0, 0, -92.5]
+					}
+				},
+				"TentaclePair5": {
+					"rotation": {
+						"vector": [-92.5, 0, 0]
+					}
+				},
+				"TentaclePair4": {
+					"rotation": {
+						"vector": [0, 0, 92.5]
+					}
+				},
+				"TentaclePair3": {
+					"rotation": {
+						"vector": [92.5, 0, 0]
+					}
+				},
+				"TentaclePair2": {
+					"rotation": {
+						"vector": [0, 0, 92.5]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
