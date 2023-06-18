@@ -1,10 +1,13 @@
 package com.rena.lost.common.entities.misc;
 
+import com.rena.lost.core.init.EntityInit;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.network.IPacket;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
@@ -13,28 +16,28 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.function.Supplier;
 
 public class CustomEggEntity extends ProjectileItemEntity {
 
-    private final Supplier<Item> itemSupplier;
-    private final Supplier<EntityType<AgeableEntity>> entityTypeSupplier;
-    public CustomEggEntity(EntityType<? extends ProjectileItemEntity> type, World worldIn, Supplier<Item> itemSupplier, Supplier<EntityType<AgeableEntity>> entityTypeSupplier) {
+    protected Item item;
+    protected Supplier<EntityType<? extends AnimalEntity>> entityTypeSupplier;
+
+    public CustomEggEntity(EntityType<? extends CustomEggEntity> type, World worldIn) {
         super(type, worldIn);
-        this.itemSupplier = itemSupplier;
+    }
+
+    public CustomEggEntity(World worldIn, LivingEntity throwerIn, Item item, Supplier<EntityType<? extends AnimalEntity>> entityTypeSupplier) {
+        super(EntityInit.CUSTOM_EGG.get(), throwerIn, worldIn);
+        this.item = item;
         this.entityTypeSupplier = entityTypeSupplier;
     }
 
-    public CustomEggEntity(World worldIn, LivingEntity throwerIn, Supplier<Item> itemSupplier, Supplier<EntityType<AgeableEntity>> entityTypeSupplier) {
-        super(EntityType.EGG, throwerIn, worldIn);
-        this.itemSupplier = itemSupplier;
-        this.entityTypeSupplier = entityTypeSupplier;
-    }
-
-    public CustomEggEntity(World worldIn, double x, double y, double z, Supplier<Item> itemSupplier, Supplier<EntityType<AgeableEntity>> entityTypeSupplier) {
-        super(EntityType.EGG, x, y, z, worldIn);
-        this.itemSupplier = itemSupplier;
+    public CustomEggEntity(World worldIn, double x, double y, double z, Item item, Supplier<EntityType<? extends AnimalEntity>> entityTypeSupplier) {
+        super(EntityInit.CUSTOM_EGG.get(), x, y, z, worldIn);
+        this.item = item;
         this.entityTypeSupplier = entityTypeSupplier;
     }
 
@@ -79,8 +82,11 @@ public class CustomEggEntity extends ProjectileItemEntity {
 
     @Override
     protected Item getDefaultItem() {
-        return this.itemSupplier.get();
+        return this.item;
     }
 
-
+    @Override
+    public IPacket<?> createSpawnPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
 }

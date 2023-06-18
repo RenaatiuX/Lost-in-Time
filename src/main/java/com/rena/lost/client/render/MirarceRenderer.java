@@ -19,7 +19,10 @@ public class MirarceRenderer extends GeoEntityRenderer<Mirarce> {
 
     @Override
     public RenderType getRenderType(Mirarce animatable, float partialTicks, MatrixStack stack, @Nullable IRenderTypeBuffer renderTypeBuffer, @Nullable IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.getEntityCutoutNoCull(textureLocation);
+        if(animatable.isChild()) {
+            stack.scale(0.5F, 0.5F, 0.5F);
+        }
+        return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }
 
     @Override

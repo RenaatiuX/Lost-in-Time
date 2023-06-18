@@ -1,0 +1,6 @@
+{
+  "parent": "lost:block/template_two_eggs",
+  "textures": {
+    "all": "lost:block/sahonachelys_eggs_2"
+  }
+}

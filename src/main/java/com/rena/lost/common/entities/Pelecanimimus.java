@@ -3,7 +3,10 @@ package com.rena.lost.common.entities;
 import com.rena.lost.common.entities.ia.PelecanimimusFishingGoal;
 import com.rena.lost.common.entities.ia.PelecanimimusWadeSwimming;
 import com.rena.lost.common.entities.ia.PelecanimimusWaitFishingGoal;
+import com.rena.lost.core.datagen.server.ModItemTagsProvider;
 import com.rena.lost.core.init.EntityInit;
+import com.rena.lost.core.init.ItemInit;
+import com.rena.lost.core.tag.LostTag;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -25,6 +28,7 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -45,6 +49,7 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     public int fishTimer = 15000;
     private boolean startingFishing;
+    public int timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
 
     public Pelecanimimus(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);
@@ -62,7 +67,7 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
         this.goalSelector.addGoal(1, new PelecanimimusWaitFishingGoal(this));
         this.goalSelector.addGoal(1, new PelecanimimusFishingGoal(this));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromTag(ItemTags.FISHES), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromTag(LostTag.Items.RAW_FISHES), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -83,11 +88,11 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.getItem().isIn(ItemTags.FISHES);
+        return stack.getItem().isIn(LostTag.Items.RAW_FISHES);
     }
 
     public boolean isTamingItem(ItemStack stack) {
-        return stack.getItem() == Items.KELP;
+        return stack.getItem().isIn(LostTag.Items.COOKED_FISHES);
     }
 
     @Override
@@ -155,6 +160,16 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
         }
     }
 
+    @Override
+    public void livingTick() {
+        super.livingTick();
+        if (!this.world.isRemote && this.isAlive() && !this.isChild() && --this.timeUntilNextEgg <= 0) {
+            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.entityDropItem(ItemInit.PELECANIMIMUS_EGG.get());
+            this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+        }
+    }
+
     /**
      * checks whether the owner is fishing
      *
@@ -177,12 +192,16 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putInt("FishingTimer", this.fishTimer);
+        compound.putInt("EggLayTime", this.timeUntilNextEgg);
     }
 
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
         this.fishTimer = compound.getInt("FishingTimer");
+        if (compound.contains("EggLayTime")) {
+            this.timeUntilNextEgg = compound.getInt("EggLayTime");
+        }
     }
 
     @Nullable

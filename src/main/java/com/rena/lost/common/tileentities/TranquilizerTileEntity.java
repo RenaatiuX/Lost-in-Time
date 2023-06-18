@@ -22,7 +22,6 @@ public class TranquilizerTileEntity extends TileEntity implements ITickableTileE
 
     @Override
     public void tick() {
-        System.out.println("wooooooorking");
         if (this.world != null && !this.world.isRemote) {
             BlockPos rangeStart = pos.add(-4, -4, -4);
 

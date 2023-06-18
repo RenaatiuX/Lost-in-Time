@@ -108,6 +108,7 @@ public class Mirarce extends AnimalEntity implements IAnimatable, IAnimationTick
         super.writeAdditional(compound);
         compound.putBoolean("Flying", this.isFlying());
         compound.putInt("PanicTimer", this.panicTicks);
+        compound.putInt("EggLayTime", this.timeUntilNextEgg);
     }
 
     @Override
@@ -115,6 +116,9 @@ public class Mirarce extends AnimalEntity implements IAnimatable, IAnimationTick
         super.readAdditional(compound);
         this.setFlying(compound.getBoolean("Flying"));
         this.panicTicks = compound.getInt("PanicTimer");
+        if (compound.contains("EggLayTime")) {
+            this.timeUntilNextEgg = compound.getInt("EggLayTime");
+        }
 
     }
 
@@ -165,7 +169,11 @@ public class Mirarce extends AnimalEntity implements IAnimatable, IAnimationTick
     @Override
     public void livingTick() {
         super.livingTick();
-
+        if (!this.world.isRemote && this.isAlive() && !this.isChild() && --this.timeUntilNextEgg <= 0) {
+            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.entityDropItem(ItemInit.MIRARCE_EGG.get());
+            this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+        }
     }
 
     @Override

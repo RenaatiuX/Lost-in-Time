@@ -6,8 +6,11 @@ import com.rena.lost.client.model.TepexichthysModel;
 import com.rena.lost.client.render.*;
 import com.rena.lost.core.init.BlockInit;
 import com.rena.lost.core.init.EntityInit;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -24,6 +27,7 @@ public class ClientEvents {
     }
 
     private static void entityRenderer() {
+        ItemRenderer itemRendererIn = Minecraft.getInstance().getItemRenderer();
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SAHONACHELYS.get(), SahonachelysRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.DAKOSAURUS.get(), DakosaurusRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.DIPLOMOCERAS.get(), DiplomocerasRenderer::new);
@@ -31,9 +35,12 @@ public class ClientEvents {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.TEPEXICHTHYS.get(), TepexichthysRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.PELECANIMIMUS.get(), PelecanimimusRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MIRARCE.get(), MirarceRenderer::new);
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.CUSTOM_EGG.get(), manager -> new SpriteRenderer<>(manager, itemRendererIn));
+
     }
 
-    private static void registerBlockRenderer(){
+    private static void registerBlockRenderer() {
         RenderTypeLookup.setRenderLayer(BlockInit.DIPLOMOCERAS_SHELL.get(), RenderType.getCutout());
     }
 }

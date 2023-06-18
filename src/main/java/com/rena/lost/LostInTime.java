@@ -7,6 +7,7 @@ import com.rena.lost.core.init.ItemInit;
 import com.rena.lost.core.init.TileEntityInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -57,6 +58,10 @@ public class LostInTime
 
     private void doClientStuff(final FMLClientSetupEvent event) {
 
+    }
+
+    public static ResourceLocation modLoc(String name) {
+        return new ResourceLocation(MOD_ID, name);
     }
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {

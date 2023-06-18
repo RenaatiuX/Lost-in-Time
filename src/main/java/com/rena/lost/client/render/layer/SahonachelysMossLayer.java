@@ -25,11 +25,12 @@ public class SahonachelysMossLayer extends GeoLayerRenderer<Sahonachelys> {
 
     @Override
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, Sahonachelys entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        RenderType renderType = RenderType.getEntityCutoutNoCull(LAYER);
-        if(entityLivingBaseIn.hasMoss()){
+        if(entityLivingBaseIn.hasMoss() && !entityLivingBaseIn.isChild()){
+            RenderType renderType = RenderType.getEntityCutoutNoCull(LAYER);
+            matrixStackIn.push();
             this.getRenderer().render(this.getEntityModel().getModel(MODEL), entityLivingBaseIn, partialTicks, renderType, matrixStackIn, bufferIn,
                     bufferIn.getBuffer(renderType), packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
-
+            matrixStackIn.pop();
         }
     }
 }

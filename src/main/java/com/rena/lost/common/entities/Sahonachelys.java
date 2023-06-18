@@ -421,7 +421,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
                 } else if (this.sahonachelys.isDigging > 200) {
                     World world = this.sahonachelys.world;
                     world.playSound(null, blockpos, SoundEvents.ENTITY_TURTLE_LAY_EGG, SoundCategory.BLOCKS, 0.3F, 0.9F + world.rand.nextFloat() * 0.2F);
-                    world.setBlockState(this.destinationBlock.up(), Blocks.TURTLE_EGG.getDefaultState().with(TurtleEggBlock.EGGS, this.sahonachelys.rand.nextInt(4) + 1), 3);
+                    world.setBlockState(this.destinationBlock.up(), BlockInit.SAHONACHELYS_EGG.get().getDefaultState().with(SahonachelysEggBlock.EGGS, this.sahonachelys.rand.nextInt(4) + 1), 3);
                     this.sahonachelys.setHasEgg(false);
                     this.sahonachelys.setDigging(false);
                     this.sahonachelys.setInLove(600);

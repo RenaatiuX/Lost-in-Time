@@ -3,6 +3,7 @@ package com.rena.lost.core.init;
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.blocks.DiplomocerasShellBlock;
 import com.rena.lost.common.blocks.MudBlock;
+import com.rena.lost.common.blocks.SahonachelysEggBlock;
 import com.rena.lost.common.blocks.TranquilizerBlock;
 import com.rena.lost.common.group.LostItemGroup;
 import net.minecraft.block.AbstractBlock;
@@ -36,6 +37,10 @@ public class BlockInit {
             () -> new DiplomocerasShellBlock(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.SAND)
                     .setRequiresTool().hardnessAndResistance(2.0F).sound(SoundType.BONE).harvestLevel(0)
                     .harvestTool(ToolType.PICKAXE).notSolid()), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> SAHONACHELYS_EGG = register("sahonachelys_egg",
+            () -> new SahonachelysEggBlock(AbstractBlock.Properties.create(Material.DRAGON_EGG, MaterialColor.SAND)
+                    .hardnessAndResistance(0.5F).sound(SoundType.METAL).tickRandomly().notSolid()), LostItemGroup.LOST_TAB);
+
     public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab){
         return register(name, blockSupplier, b -> new BlockItem(b, new Item.Properties().group(tab)));
     }

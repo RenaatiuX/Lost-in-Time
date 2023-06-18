@@ -2,6 +2,7 @@ package com.rena.lost.core.init;
 
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.group.LostItemGroup;
+import com.rena.lost.common.items.CustomEggItem;
 import com.rena.lost.common.items.LostFishBucketItem;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -29,6 +30,7 @@ public class ItemInit {
             () -> new ForgeSpawnEggItem(EntityInit.PELECANIMIMUS, 15921906, 7493679, new Item.Properties().group(LostItemGroup.LOST_TAB)));
     public static final RegistryObject<Item> MIRARCE_SPAWN_EGG = ITEMS.register("mirarce_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityInit.MIRARCE, 7887161, 12951925, new Item.Properties().group(LostItemGroup.LOST_TAB)));
+
     //Items
     public static final RegistryObject<Item> DAKOSAURUS_TOOTH = ITEMS.register("dakosaurus_tooth",
             () -> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
@@ -36,4 +38,8 @@ public class ItemInit {
             ()-> new LostFishBucketItem(EntityInit.HYPSOCORMUS::get, () -> Fluids.WATER, new Item.Properties().group(LostItemGroup.LOST_TAB)));
     public static final RegistryObject<Item> TEPEXICHTHYS_BUCKET = ITEMS.register("tepexichthys_bucket",
             ()-> new LostFishBucketItem(EntityInit.TEPEXICHTHYS::get, () -> Fluids.WATER, new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> MIRARCE_EGG = ITEMS.register("mirarce_egg",
+            () -> new CustomEggItem(new Item.Properties().group(LostItemGroup.LOST_TAB), EntityInit.MIRARCE::get));
+    public static final RegistryObject<Item> PELECANIMIMUS_EGG = ITEMS.register("pelecanimimus_egg",
+            () -> new CustomEggItem(new Item.Properties().group(LostItemGroup.LOST_TAB), EntityInit.PELECANIMIMUS::get));
 }

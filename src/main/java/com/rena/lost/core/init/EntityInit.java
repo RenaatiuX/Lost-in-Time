@@ -2,6 +2,7 @@ package com.rena.lost.core.init;
 
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.entities.*;
+import com.rena.lost.common.entities.misc.CustomEggEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -26,4 +27,8 @@ public class EntityInit {
             ()-> EntityType.Builder.<Pelecanimimus>create(Pelecanimimus::new, EntityClassification.CREATURE).size(0.7F, 1.3F).trackingRange(10).build("pelecanimimus"));
     public static final RegistryObject<EntityType<Mirarce>> MIRARCE = ENTITY_TYPES.register("mirarce",
             ()-> EntityType.Builder.<Mirarce>create(Mirarce::new, EntityClassification.CREATURE).size(0.7F, 1.0F).trackingRange(10).build("mirarce"));
+
+    //Projectiles
+    public static final RegistryObject<EntityType<CustomEggEntity>> CUSTOM_EGG = ENTITY_TYPES.register("custom_egg",
+            ()-> EntityType.Builder.<CustomEggEntity>create(CustomEggEntity::new, EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).build("custom_egg"));
 }
