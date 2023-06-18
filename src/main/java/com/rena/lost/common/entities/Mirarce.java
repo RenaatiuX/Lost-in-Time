@@ -46,6 +46,7 @@ public class Mirarce extends AnimalEntity implements IAnimatable, IAnimationTick
     public float flyProgress;
     private boolean isLandNavigator;
     public int timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+
     public Mirarce(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
         switchNavigator(false);
@@ -61,7 +62,7 @@ public class Mirarce extends AnimalEntity implements IAnimatable, IAnimationTick
         this.goalSelector.addGoal(1, new MirarceFleeGoal(this));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.KELP), false));
-        this.goalSelector.addGoal(4, new MirarceAvoidEntityGoal(this, LivingEntity.class, 5.0F, 2.2D, 2.2D));
+        this.goalSelector.addGoal(4, new MirarceAvoidEntityGoal<>(this, LivingEntity.class, 5.0F, 2.2D, 2.2D));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -203,15 +204,17 @@ public class Mirarce extends AnimalEntity implements IAnimatable, IAnimationTick
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving() && !this.isFlying()) {
-            if (this.isSprinting()) {
-                event.getController().setAnimation(new AnimationBuilder().loop("run"));
-                event.getController().setAnimationSpeed(1.5D);
-            } else {
-                event.getController().setAnimation(new AnimationBuilder().loop("walk"));
-            }
+        Vector3d prevPosVector = new Vector3d(this.prevPosX, this.prevPosY, this.prevPosZ);
+        double distMoved = prevPosVector.subtract(getPositionVec()).length();
+        if (!this.isFlying() && distMoved > 0.09) {
+            event.getController().setAnimation(new AnimationBuilder().loop("run"));
+            event.getController().setAnimationSpeed(1.5D);
             return PlayState.CONTINUE;
-        } else if (this.isFlying()) {
+        } else if (!this.isFlying() && distMoved < 0.09 && event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().loop("walk"));
+            return PlayState.CONTINUE;
+        }
+        if (this.isFlying()) {
             event.getController().setAnimation(new AnimationBuilder().loop("fly"));
             return PlayState.CONTINUE;
         }

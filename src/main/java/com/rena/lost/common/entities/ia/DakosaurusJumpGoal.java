@@ -47,7 +47,7 @@ public class DakosaurusJumpGoal extends JumpGoal {
     }
 
     private boolean isAirAbove(BlockPos pos, int dx, int dz, int scale) {
-        return this.dakosaurus.world.getBlockState(pos.add(dx * scale, 1, dz * scale)).isAir() && this.dakosaurus.world.getBlockState(pos.add(dx * scale, 2, dz * scale)).isAir();
+        return this.dakosaurus.world.getBlockState(pos.add(dx * scale, 1, dz * scale)).isAir() && this.dakosaurus.world.isAirBlock(pos.add(dx * scale, 2, dz * scale));
     }
 
     @Override
