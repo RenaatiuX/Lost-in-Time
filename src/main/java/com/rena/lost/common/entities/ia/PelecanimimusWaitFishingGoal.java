@@ -17,18 +17,15 @@ public class PelecanimimusWaitFishingGoal extends Goal {
 
     @Override
     public void startExecuting() {
-        pelecanimimus.setStartinFishing(true);
+        pelecanimimus.setStartingFishing(true);
     }
 
     @Override
     public boolean shouldExecute() {
-        return (this.pelecanimimus.isTamed() ? fishingCondition() : !hasFishingCooldown()) && !pelecanimimus.isFishing();
+        return !pelecanimimus.isFishing() && (this.pelecanimimus.isTamed() ? pelecanimimus.fishingCondition() : !hasFishingCooldown());
     }
 
-    private boolean fishingCondition() {
-        PlayerEntity owner = (PlayerEntity) pelecanimimus.getOwner();
-        return owner != null && owner.isHandActive() && owner.getActiveItemStack().getItem() == Items.FISHING_ROD;
-    }
+
 
     private boolean hasFishingCooldown() {
         return this.pelecanimimus.fishTimer > 0;

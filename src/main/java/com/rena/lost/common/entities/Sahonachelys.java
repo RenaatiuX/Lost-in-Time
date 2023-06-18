@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -54,8 +55,10 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimatable, IAnimationTickable, IForgeShearable {
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    private static final DataParameter<Integer> MOSS = EntityDataManager.createKey(Sahonachelys.class, DataSerializers.VARINT);
+
+    public static final int MOSS_COOLDOWN = 12000;
+
+    private static final DataParameter<Boolean> MOSS = EntityDataManager.createKey(Sahonachelys.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HAS_EGG = EntityDataManager.createKey(Sahonachelys.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> IS_DIGGING = EntityDataManager.createKey(Sahonachelys.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> TRAVELLING = EntityDataManager.createKey(Sahonachelys.class, DataSerializers.BOOLEAN);
@@ -64,6 +67,8 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
 
     private int isDigging;
     private int mossTime = 0, buttonPressAnimationCooldown = 0;
+    private BlockPos buttonPos = null;
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public Sahonachelys(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
@@ -117,7 +122,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
     @Override
     protected void registerData() {
         super.registerData();
-        this.dataManager.register(MOSS, 0);
+        this.dataManager.register(MOSS, false);
         this.dataManager.register(HAS_EGG, Boolean.FALSE);
         this.dataManager.register(IS_DIGGING, Boolean.FALSE);
         this.dataManager.register(PRESS_BUTTON, Boolean.FALSE);
@@ -129,17 +134,25 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
     public void tick() {
         super.tick();
         if (!this.world.isRemote) {
-            mossTime++;
+
             if (this.isInWater()) {
-                if (mossTime > 12000) {
-                    mossTime = 0;
-                    this.setMoss(Math.min(10, this.getMoss() + 1));
+                if (hasMoss()) {
+                    if (mossTime > MOSS_COOLDOWN || this.rand.nextDouble() < (double) mossTime / (double) MOSS_COOLDOWN) {
+                        mossTime = 0;
+                        this.setMoss(false);
+                    } else {
+                        mossTime++;
+                    }
                 }
             }
-            if (this.buttonPressAnimationCooldown == 0 && isPressingButton()){
+            if (this.buttonPressAnimationCooldown == 0 && isPressingButton()) {
                 setPressingButton(false);
+                BlockState buttonState = this.world.getBlockState(this.buttonPos);
+                AbstractButtonBlock button = (AbstractButtonBlock) buttonState.getBlock();
+                button.powerBlock(buttonState, this.world, this.buttonPos);
+                this.buttonPos = null;
             }
-            if (this.buttonPressAnimationCooldown > 0){
+            if (this.buttonPressAnimationCooldown > 0) {
                 this.buttonPressAnimationCooldown--;
             }
         }
@@ -147,7 +160,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
 
     @Override
     public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-        this.setMoss(rand.nextInt(10));
+        this.setMoss(rand.nextInt(10) == 0);
         this.setTravelPos(BlockPos.ZERO);
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
@@ -157,11 +170,11 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
         return new Sahonachelys.Navigator(this, worldIn);
     }
 
-    public int getMoss() {
+    public boolean hasMoss() {
         return this.dataManager.get(MOSS);
     }
 
-    public void setMoss(int moss) {
+    public void setMoss(boolean moss) {
         this.dataManager.set(MOSS, moss);
     }
 
@@ -209,19 +222,21 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
     @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
-        compound.putInt("MossLevel", this.getMoss());
+        compound.putBoolean("MossLevel", this.hasMoss());
         compound.putInt("MossTime", this.mossTime);
         compound.putBoolean("HasEgg", this.hasEgg());
         compound.putBoolean("isPressingButton", this.isPressingButton());
         compound.putInt("TravelPosX", this.getTravelPos().getX());
         compound.putInt("TravelPosY", this.getTravelPos().getY());
         compound.putInt("TravelPosZ", this.getTravelPos().getZ());
+        if (buttonPos != null)
+            compound.put("buttonPos", NBTUtil.writeBlockPos(this.buttonPos));
     }
 
     @Override
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
-        this.setMoss(compound.getInt("MossLevel"));
+        this.setMoss(compound.getBoolean("MossLevel"));
         this.mossTime = compound.getInt("MossTime");
         this.setHasEgg(compound.getBoolean("HasEgg"));
         this.setPressingButton(compound.getBoolean("isPressingButton"));
@@ -229,6 +244,8 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
         int i1 = compound.getInt("TravelPosY");
         int j1 = compound.getInt("TravelPosZ");
         this.setTravelPos(new BlockPos(l, i1, j1));
+        if (compound.contains("buttonPos"))
+            this.buttonPos = NBTUtil.readBlockPos(compound.getCompound("buttonPos"));
     }
 
     @Override
@@ -319,7 +336,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
 
     @Override
     public boolean isShearable(@Nonnull ItemStack item, World world, BlockPos pos) {
-        return this.isAlive() && this.getMoss() > 0;
+        return this.isAlive() && this.hasMoss();
     }
 
     @Nonnull
@@ -327,7 +344,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
     public List<ItemStack> onSheared(@Nullable PlayerEntity player, @Nonnull ItemStack item, World world, BlockPos pos, int fortune) {
         world.playMovingSound(null, this, SoundEvents.ENTITY_SHEEP_SHEAR, player == null ? SoundCategory.BLOCKS : SoundCategory.PLAYERS, 1.0F, 1.0F);
         if (!world.isRemote()) {
-            this.setMoss(0);
+            this.setMoss(false);
             return Collections.singletonList(new ItemStack(Items.SEAGRASS));
         }
         return java.util.Collections.emptyList();
@@ -342,8 +359,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         Vector3d prevPosVector = new Vector3d(this.prevPosX, this.prevPosY, this.prevPosZ);
-        if (isPressingButton()){
-            System.out.println("button animaton should be played");
+        if (isPressingButton()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("buttonpush", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
@@ -404,7 +420,7 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
                     this.sahonachelys.setDigging(true);
                 } else if (this.sahonachelys.isDigging > 200) {
                     World world = this.sahonachelys.world;
-                    world.playSound((PlayerEntity) null, blockpos, SoundEvents.ENTITY_TURTLE_LAY_EGG, SoundCategory.BLOCKS, 0.3F, 0.9F + world.rand.nextFloat() * 0.2F);
+                    world.playSound(null, blockpos, SoundEvents.ENTITY_TURTLE_LAY_EGG, SoundCategory.BLOCKS, 0.3F, 0.9F + world.rand.nextFloat() * 0.2F);
                     world.setBlockState(this.destinationBlock.up(), Blocks.TURTLE_EGG.getDefaultState().with(TurtleEggBlock.EGGS, this.sahonachelys.rand.nextInt(4) + 1), 3);
                     this.sahonachelys.setHasEgg(false);
                     this.sahonachelys.setDigging(false);
@@ -491,7 +507,6 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
                 //select a random element from the list
                 int index = random.nextInt(buttonPositions.size());
                 this.destinationBlock = buttonPositions.get(index);
-                sahonachelys.setPressingButton(true);
                 return true;
             }
 
@@ -503,18 +518,13 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
         public void tick() {
             if (this.destinationBlock != null) {
                 double distanceSq = this.sahonachelys.getDistanceSq(this.destinationBlock.getX() + 0.5, this.destinationBlock.getY() + 0.5, this.destinationBlock.getZ() + 0.5);
-                if (distanceSq <= 1.5) {
+                if (distanceSq <= 1.25) {
                     sahonachelys.getLookController().setLookPosition(Vector3d.copy(this.destinationBlock));
-                    System.out.println("correct disntance");
-                    BlockState buttonState = this.sahonachelys.world.getBlockState(this.destinationBlock);
-                    AbstractButtonBlock button = (AbstractButtonBlock) buttonState.getBlock();
 
-                    // pressing of the button
-                    button.powerBlock(buttonState, this.sahonachelys.world, this.destinationBlock);
-
+                    sahonachelys.buttonPos = new BlockPos(this.destinationBlock);
                     this.destinationBlock = null;
                     this.timeUntilNextPress = 200; // 20 seconds in ticks
-                    sahonachelys.setPressingButton(false);
+                    sahonachelys.setPressingButton(true);
                     sahonachelys.buttonPressAnimationCooldown = 15; // animation goes 14.4 ticks so i rounded it up to 15
                 } else {
                     this.sahonachelys.getNavigator().tryMoveToXYZ(this.destinationBlock.getX() + 0.5, this.destinationBlock.getY() + 0.5, this.destinationBlock.getZ() + 0.5, this.movementSpeed);

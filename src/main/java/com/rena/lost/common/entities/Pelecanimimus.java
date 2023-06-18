@@ -2,10 +2,11 @@ package com.rena.lost.common.entities;
 
 import com.rena.lost.common.entities.ia.PelecanimimusFishingGoal;
 import com.rena.lost.common.entities.ia.PelecanimimusWadeSwimming;
+import com.rena.lost.common.entities.ia.PelecanimimusWaitFishingGoal;
 import com.rena.lost.core.init.EntityInit;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -22,6 +23,9 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -40,7 +44,7 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
     private static final DataParameter<Boolean> FISHING = EntityDataManager.createKey(Pelecanimimus.class, DataSerializers.BOOLEAN);
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     public int fishTimer = 15000;
-    private boolean startinFishing;
+    private boolean startingFishing;
 
     public Pelecanimimus(EntityType<? extends TameableEntity> type, World worldIn) {
         super(type, worldIn);
@@ -55,6 +59,7 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new PelecanimimusWadeSwimming(this));
+        this.goalSelector.addGoal(1, new PelecanimimusWaitFishingGoal(this));
         this.goalSelector.addGoal(1, new PelecanimimusFishingGoal(this));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromTag(ItemTags.FISHES), false));
@@ -81,6 +86,10 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
         return stack.getItem().isIn(ItemTags.FISHES);
     }
 
+    public boolean isTamingItem(ItemStack stack) {
+        return stack.getItem() == Items.KELP;
+    }
+
     @Override
     protected void registerData() {
         super.registerData();
@@ -95,12 +104,39 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
         this.dataManager.set(FISHING, fishing);
     }
 
-    public boolean isStartinFishing() {
-        return startinFishing;
+    public boolean isStartingFishing() {
+        return startingFishing;
     }
 
-    public void setStartinFishing(boolean startinFishing) {
-        this.startinFishing = startinFishing;
+    public void setStartingFishing(boolean startingFishing) {
+        this.startingFishing = startingFishing;
+    }
+
+
+    @Override
+    public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand hand) {
+        ItemStack itemstack = playerIn.getHeldItem(hand);
+        if (!world.isRemote()) {
+            if (!this.isTamed() && isTamingItem(itemstack)) {
+                if (!playerIn.abilities.isCreativeMode) {
+                    itemstack.shrink(1);
+                }
+
+                if (this.rand.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, playerIn)) {
+                    this.setTamedBy(playerIn);
+                    this.navigator.clearPath();
+                    this.setAttackTarget(null);
+                    this.fishTimer = 0;
+                    this.world.setEntityState(this, (byte) 7);
+                } else {
+                    this.world.setEntityState(this, (byte) 6);
+                }
+
+                return ActionResultType.SUCCESS;
+            }
+        }
+
+        return super.getEntityInteractionResult(playerIn, hand);
     }
 
     @Override
@@ -112,10 +148,21 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
             stepHeight = 0.6F;
         }
         if (!world.isRemote) {
+            //System.out.println(isFishing() + "|" + isStartingFishing());
             if (fishTimer > 0) {
                 fishTimer--;
             }
         }
+    }
+
+    /**
+     * checks whether the owner is fishing
+     *
+     * @return
+     */
+    public boolean fishingCondition() {
+        PlayerEntity owner = (PlayerEntity) this.getOwner();
+        return owner != null && owner.fishingBobber != null;
     }
 
     public void spawnFishItem() {
@@ -144,21 +191,17 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
         return EntityInit.PELECANIMIMUS.get().create(world);
     }
 
-    public void resetFishingTimer() {
-        this.fishTimer = Math.max(1200 + rand.nextInt(1200), 200);
-    }
-
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        Vector3d prevPosVector = new Vector3d(this.prevPosX, this.prevPosY, this.prevPosZ);
         if (this.isFishing()) {
             event.getController().setAnimation(new AnimationBuilder().playOnce("fish.start").playOnce("idle.fish").playOnce("fish.catch"));
             return PlayState.CONTINUE;
         }
-        if (event.isMoving()) {
-            if (this.isSprinting()) {
-                event.getController().setAnimation(new AnimationBuilder().loop("run"));
-            } else {
-                event.getController().setAnimation(new AnimationBuilder().loop("walk"));
-            }
+        double distMoved = prevPosVector.subtract(getPositionVec()).length();
+        if (distMoved >= 0.001 && distMoved <= 0.05) {
+            event.getController().setAnimation(new AnimationBuilder().loop("walk"));
+        } else if (distMoved > 0.05) {
+            event.getController().setAnimation(new AnimationBuilder().loop("run"));
         } else {
             event.getController().setAnimation(new AnimationBuilder().loop("idle"));
         }
