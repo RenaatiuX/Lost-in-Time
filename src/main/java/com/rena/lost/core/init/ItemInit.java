@@ -1,11 +1,14 @@
 package com.rena.lost.core.init;
 
 import com.rena.lost.LostInTime;
+import com.rena.lost.client.ClientISTERProvider;
 import com.rena.lost.common.group.LostItemGroup;
-import com.rena.lost.common.items.CustomEggItem;
-import com.rena.lost.common.items.LostFishBucketItem;
+import com.rena.lost.common.items.*;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemTier;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -42,4 +45,68 @@ public class ItemInit {
             () -> new CustomEggItem(new Item.Properties().group(LostItemGroup.LOST_TAB), EntityInit.MIRARCE::get));
     public static final RegistryObject<Item> PELECANIMIMUS_EGG = ITEMS.register("pelecanimimus_egg",
             () -> new CustomEggItem(new Item.Properties().group(LostItemGroup.LOST_TAB), EntityInit.PELECANIMIMUS::get));
+    public static final RegistryObject<Item> ADOBE_BRICK = ITEMS.register("adobe_brick",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> BROWN_CLAY_BALL = ITEMS.register("brown_clay_ball",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> CONCAVENATOR_HUMP = ITEMS.register("concavenator_hump",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> MUD_BALL = ITEMS.register("mud_ball",
+            ()-> new MudBallItem(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+
+    //Food
+    public static final RegistryObject<Item> RAW_PELECANIMIMUS_MEAT = ITEMS.register("raw_pelecanimimus_meat",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.RAW_PELECANIMIMUS_MEAT)));
+    public static final RegistryObject<Item> COOKED_PELECANIMIMUS_MEAT = ITEMS.register("cooked_pelecanimimus_meat",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.COOKED_PELECANIMIMUS_MEAT)));
+    public static final RegistryObject<Item> RAW_DAKOSAURUS_MEAT = ITEMS.register("raw_dakosaurus_meat",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.RAW_DAKOSAURUS_MEAT)));
+    public static final RegistryObject<Item> COOKED_DAKOSAURUS_MEAT = ITEMS.register("cooked_dakosaurus_meat",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.COOKED_DAKOSAURUS_MEAT)));
+    public static final RegistryObject<Item> HYPSOCORMUS = ITEMS.register("hypsocormus",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.HYPSOCORMUS)));
+    public static final RegistryObject<Item> COOKED_HYPSOCORMUS = ITEMS.register("cooked_hypsocormus",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.COOKED_HYPSOCORMUS)));
+    public static final RegistryObject<Item> TEPEXICHTHYS = ITEMS.register("tepexichthys",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.TEPEXICHTHYS)));
+    public static final RegistryObject<Item> COOKED_TEPEXICHTHYS = ITEMS.register("cooked_tepexichthys",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.COOKED_TEPEXICHTHYS)));
+
+    //Armor
+    public static final RegistryObject<Item> CONCAVENATOR_MASK =ITEMS.register("concavenator_mask",
+            ()-> new ConcavenatorMaskItem(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(LostItemGroup.LOST_TAB)));
+
+    //Weapons
+    public static final RegistryObject<Item> WOODEN_SPEAR_INVENTORY = ITEMS.register("wooden_spear_inventory",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> STONE_SPEAR_INVENTORY = ITEMS.register("stone_spear_inventory",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> IRON_SPEAR_INVENTORY = ITEMS.register("iron_spear_inventory",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOLD_SPEAR_INVENTORY = ITEMS.register("golden_spear_inventory",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DIAMOND_SPEAR_INVENTORY = ITEMS.register("diamond_spear_inventory",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> NETHERITE_SPEAR_INVENTORY = ITEMS.register("netherite_spear_inventory",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> WOODEN_SPEAR = ITEMS.register("wooden_spear",
+            () -> new SpearItem(ItemTier.WOOD, new Item.Properties().group(LostItemGroup.LOST_TAB).setISTER(
+                    () -> () -> ClientISTERProvider.bakeSpearISTER("wooden_spear"))));
+    public static final RegistryObject<Item> STONE_SPEAR = ITEMS.register("stone_spear",
+            () -> new SpearItem(ItemTier.STONE, new Item.Properties().group(LostItemGroup.LOST_TAB).setISTER(
+                    () -> () -> ClientISTERProvider.bakeSpearISTER("stone_spear"))));
+    public static final RegistryObject<Item> IRON_SPEAR = ITEMS.register("iron_spear",
+            () -> new SpearItem(ItemTier.IRON, new Item.Properties().group(LostItemGroup.LOST_TAB).setISTER(
+                    () -> () -> ClientISTERProvider.bakeSpearISTER("iron_spear"))));
+    public static final RegistryObject<Item> GOLD_SPEAR = ITEMS.register("golden_spear",
+            () -> new SpearItem(ItemTier.GOLD, new Item.Properties().group(LostItemGroup.LOST_TAB).setISTER(
+                    () -> () -> ClientISTERProvider.bakeSpearISTER("golden_spear"))));
+    public static final RegistryObject<Item> DIAMOND_SPEAR = ITEMS.register("diamond_spear",
+            () -> new SpearItem(ItemTier.DIAMOND, new Item.Properties().group(LostItemGroup.LOST_TAB).setISTER(
+                    () -> () -> ClientISTERProvider.bakeSpearISTER("diamond_spear"))));
+    public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
+            () -> new SpearItem(ItemTier.NETHERITE, new Item.Properties().group(LostItemGroup.LOST_TAB).setISTER(
+                    () -> () -> ClientISTERProvider.bakeSpearISTER("netherite_spear"))));
+
+
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lost:block/adobe_slab"
+    },
+    "type=double": {
+      "model": "lost:block/adobe_bricks"
+    },
+    "type=top": {
+      "model": "lost:block/adobe_slab_top"
+    }
+  }
+}

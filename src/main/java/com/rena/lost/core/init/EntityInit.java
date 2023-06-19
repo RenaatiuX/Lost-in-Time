@@ -3,6 +3,8 @@ package com.rena.lost.core.init;
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.entities.*;
 import com.rena.lost.common.entities.misc.CustomEggEntity;
+import com.rena.lost.common.entities.misc.MudBallEntity;
+import com.rena.lost.common.entities.misc.SpearEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -31,4 +33,8 @@ public class EntityInit {
     //Projectiles
     public static final RegistryObject<EntityType<CustomEggEntity>> CUSTOM_EGG = ENTITY_TYPES.register("custom_egg",
             ()-> EntityType.Builder.<CustomEggEntity>create(CustomEggEntity::new, EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).build("custom_egg"));
+    public static final RegistryObject<EntityType<MudBallEntity>> MUD_BALL = ENTITY_TYPES.register("mud_ball",
+            ()-> EntityType.Builder.<MudBallEntity>create(MudBallEntity::new, EntityClassification.MISC).size(0.25F, 0.25F).trackingRange(4).updateInterval(10).build("mud_ball"));
+    public static final RegistryObject<EntityType<SpearEntity>> SPEAR = ENTITY_TYPES.register("spear",
+            () -> EntityType.Builder.<SpearEntity>create(SpearEntity::new, EntityClassification.MISC).size(0.5F, 0.5F).build(LostInTime.modLoc("spear").toString()));
 }

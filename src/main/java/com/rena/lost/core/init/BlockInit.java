@@ -6,9 +6,7 @@ import com.rena.lost.common.blocks.MudBlock;
 import com.rena.lost.common.blocks.SahonachelysEggBlock;
 import com.rena.lost.common.blocks.TranquilizerBlock;
 import com.rena.lost.common.group.LostItemGroup;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
@@ -40,6 +38,42 @@ public class BlockInit {
     public static final RegistryObject<Block> SAHONACHELYS_EGG = register("sahonachelys_egg",
             () -> new SahonachelysEggBlock(AbstractBlock.Properties.create(Material.DRAGON_EGG, MaterialColor.SAND)
                     .hardnessAndResistance(0.5F).sound(SoundType.METAL).tickRandomly().notSolid()), LostItemGroup.LOST_TAB);
+
+    public static final RegistryObject<Block> ADOBE_BRICKS = register("adobe_bricks",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.ADOBE)
+                    .setRequiresTool().hardnessAndResistance(1.0F, 3.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ADOBE_SLAB = register("adobe_slab",
+            () -> new SlabBlock(AbstractBlock.Properties.from(BlockInit.ADOBE_BRICKS.get())), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ADOBE_STAIRS = register("adobe_stairs",
+            () -> new StairsBlock(() -> ADOBE_BRICKS.get().getDefaultState(), AbstractBlock.Properties.from(ADOBE_BRICKS.get())), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ADOBE_WALL = register("adobe_wall",
+            () -> new WallBlock(AbstractBlock.Properties.from(ADOBE_BRICKS.get())), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> BROWN_CLAY = register("brown_clay",
+            () -> new Block(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.BROWN)
+                    .hardnessAndResistance(0.6F).sound(SoundType.GROUND)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> CHISELED_PURPLE_BRICKS = register("chiseled_purple_bricks",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
+                    .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> POLISHED_PURPLE_BRICKS = register("polished_purple_bricks",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
+                    .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> PURPLE_BRICKS = register("purple_bricks",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
+                    .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> PURPLE_BRICKS_PILLAR = register("purple_bricks_pillar",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
+                    .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> CRACKED_PURPLE_BRICKS = register("cracked_purple_bricks",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
+                    .setRequiresTool().hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> VOIDITE_ORE = register("voidite_ore",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
+                    .hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE)
+                    .harvestLevel(2)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> VOIDITE_BLOCK = register("voidite_block",
+            () -> new Block(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
+                    .hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE)
+                    .harvestLevel(2)), LostItemGroup.LOST_TAB);
 
     public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab){
         return register(name, blockSupplier, b -> new BlockItem(b, new Item.Properties().group(tab)));
