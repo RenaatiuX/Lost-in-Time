@@ -19,14 +19,6 @@ public class PelecanimimusRenderer extends GeoEntityRenderer<Pelecanimimus> {
     }
 
     @Override
-    public RenderType getRenderType(Pelecanimimus animatable, float partialTicks, MatrixStack stack, @Nullable IRenderTypeBuffer renderTypeBuffer, @Nullable IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        if(animatable.isChild()) {
-            stack.scale(0.5F, 0.5F, 0.5F);
-        }
-        return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
-    }
-
-    @Override
     public ResourceLocation getEntityTexture(Pelecanimimus entity) {
         return getGeoModelProvider().getTextureLocation(entity);
     }

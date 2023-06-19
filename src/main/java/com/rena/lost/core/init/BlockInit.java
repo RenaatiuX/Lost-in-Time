@@ -1,10 +1,7 @@
 package com.rena.lost.core.init;
 
 import com.rena.lost.LostInTime;
-import com.rena.lost.common.blocks.DiplomocerasShellBlock;
-import com.rena.lost.common.blocks.MudBlock;
-import com.rena.lost.common.blocks.SahonachelysEggBlock;
-import com.rena.lost.common.blocks.TranquilizerBlock;
+import com.rena.lost.common.blocks.*;
 import com.rena.lost.common.group.LostItemGroup;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -51,21 +48,19 @@ public class BlockInit {
     public static final RegistryObject<Block> BROWN_CLAY = register("brown_clay",
             () -> new Block(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.BROWN)
                     .hardnessAndResistance(0.6F).sound(SoundType.GROUND)), LostItemGroup.LOST_TAB);
-    public static final RegistryObject<Block> CHISELED_PURPLE_BRICKS = register("chiseled_purple_bricks",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
-                    .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> POLISHED_PURPLE_BRICKS = register("polished_purple_bricks",
             () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
                     .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> PURPLE_BRICKS = register("purple_bricks",
             () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
                     .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> PURPLE_BRICKS_SLAB = register("purple_bricks_slab",
+            () -> new SlabBlock(AbstractBlock.Properties.from(BlockInit.PURPLE_BRICKS.get())), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> PURPLE_BRICKS_STAIRS = register("purple_bricks_stairs",
+            () -> new StairsBlock(() -> PURPLE_BRICKS.get().getDefaultState(), AbstractBlock.Properties.from(PURPLE_BRICKS.get())), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> PURPLE_BRICKS_PILLAR = register("purple_bricks_pillar",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
                     .setRequiresTool().hardnessAndResistance(1.5F, 6.0F)), LostItemGroup.LOST_TAB);
-    public static final RegistryObject<Block> CRACKED_PURPLE_BRICKS = register("cracked_purple_bricks",
-            () -> new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.PURPLE)
-                    .setRequiresTool().hardnessAndResistance(1.5F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(0)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> VOIDITE_ORE = register("voidite_ore",
             () -> new Block(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
                     .hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE)
@@ -74,6 +69,10 @@ public class BlockInit {
             () -> new Block(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
                     .hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE)
                     .harvestLevel(2)), LostItemGroup.LOST_TAB);
+
+    public static final RegistryObject<Block> DUCKWEED = BLOCKS.register("duckweed",
+            () -> new DuckWeedBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.LILY_PADS).notSolid()));
 
     public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab){
         return register(name, blockSupplier, b -> new BlockItem(b, new Item.Properties().group(tab)));

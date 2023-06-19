@@ -4,6 +4,8 @@
     "minecraft:salmon",
     "minecraft:cod",
     "minecraft:tropical_fish",
-    "minecraft:pufferfish"
+    "minecraft:pufferfish",
+    "lost:hypsocormus",
+    "lost:tepexichthys"
   ]
 }

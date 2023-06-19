@@ -4,11 +4,14 @@ import com.rena.lost.LostInTime;
 import com.rena.lost.client.ClientISTERProvider;
 import com.rena.lost.common.group.LostItemGroup;
 import com.rena.lost.common.items.*;
+import com.rena.lost.common.items.util.LostArmorMaterial;
+import com.rena.lost.common.items.util.LostItemTier;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemTier;
+import net.minecraft.item.SwordItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -53,6 +56,14 @@ public class ItemInit {
             ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
     public static final RegistryObject<Item> MUD_BALL = ITEMS.register("mud_ball",
             ()-> new MudBallItem(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> VOIDITE_CRYSTAL = ITEMS.register("voidite_crystal",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> VOIDITE_FRAGMENT = ITEMS.register("voidite_fragment",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> VOIDITE_ORB = ITEMS.register("voidite_orb",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> DUCKWEED = ITEMS.register("duckweed",
+            () -> new DuckWeedItem(BlockInit.DUCKWEED.get(), new Item.Properties().group(LostItemGroup.LOST_TAB)));
 
     //Food
     public static final RegistryObject<Item> RAW_PELECANIMIMUS_MEAT = ITEMS.register("raw_pelecanimimus_meat",
@@ -74,7 +85,7 @@ public class ItemInit {
 
     //Armor
     public static final RegistryObject<Item> CONCAVENATOR_MASK =ITEMS.register("concavenator_mask",
-            ()-> new ConcavenatorMaskItem(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Item.Properties().group(LostItemGroup.LOST_TAB)));
+            ()-> new ConcavenatorMaskItem(LostArmorMaterial.CONCAVENATOR, EquipmentSlotType.HEAD, new Item.Properties().group(LostItemGroup.LOST_TAB)));
 
     //Weapons
     public static final RegistryObject<Item> WOODEN_SPEAR_INVENTORY = ITEMS.register("wooden_spear_inventory",
@@ -107,6 +118,10 @@ public class ItemInit {
     public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
             () -> new SpearItem(ItemTier.NETHERITE, new Item.Properties().group(LostItemGroup.LOST_TAB).setISTER(
                     () -> () -> ClientISTERProvider.bakeSpearISTER("netherite_spear"))));
+    public static final RegistryObject<Item> TOOTH_MACE = ITEMS.register("tooth_mace",
+            () -> new SwordItem(LostItemTier.TOOTH_MACE, 3, -3.0F, new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> WOODEN_MACE = ITEMS.register("wooden_mace",
+            () -> new SwordItem(LostItemTier.WOODEN_MACE, 3, -3.0F, new Item.Properties().group(LostItemGroup.LOST_TAB)));
 
 
 }

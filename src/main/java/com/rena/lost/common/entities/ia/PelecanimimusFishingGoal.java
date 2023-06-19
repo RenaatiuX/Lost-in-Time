@@ -42,7 +42,7 @@ public class PelecanimimusFishingGoal extends Goal {
 
     @Override
     public boolean shouldExecute() {
-        if (entity.isStartingFishing() && this.entity.getRNG().nextInt(30) == 0) {
+        if (entity.isStartingFishing() && this.entity.getRNG().nextInt(30) == 0 && !entity.isChild()) {
             if (entity.isInWater()) {
                 waterPos = entity.getPosition();
                 targetPos = waterPos;

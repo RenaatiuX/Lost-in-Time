@@ -32,6 +32,12 @@
   "item.lost.golden_spear": "Golden Spear",
   "item.lost.diamond_spear": "Diamond Spear",
   "item.lost.netherite_spear": "Netherite Spear",
+  "item.lost.voidite_crystal": "Voidite Crystal",
+  "item.lost.voidite_fragment": "Voidite Fragment",
+  "item.lost.voidite_orb": "Voidite Orb",
+  "item.lost.tooth_mace": "Tooth Mace",
+  "item.lost.wooden_mace": "Wooden Mace",
+  "item.lost.duckweed": "Duckweed",
 
   "block.lost.mud": "Mud",
   "block.lost.tranquilizer": "Tranquilizer",
@@ -42,13 +48,14 @@
   "block.lost.adobe_stairs": "Adobe Stairs",
   "block.lost.adobe_wall": "Adobe Wall",
   "block.lost.brown_clay": "Brown Clay",
-  "block.lost.chiseled_purple_bricks": "Chiseled Purple Bricks",
   "block.lost.polished_purple_bricks": "Polished Purple Bricks",
   "block.lost.purple_bricks": "Purple Bricks",
+  "block.lost.purple_bricks_slab": "Purple Bricks Slab",
+  "block.lost.purple_bricks_stairs": "Purple Bricks Stairs",
   "block.lost.purple_bricks_pillar": "Purple Bricks Pillar",
-  "block.lost.cracked_purple_bricks": "Cracked Purple Bricks",
   "block.lost.voidite_ore": "Voidite Ore",
   "block.lost.voidite_block": "Voidite Block",
+  "block.lost.duckweed": "Duckweed",
 
   "entity.lost.sahonachelys": "Sahonachelys",
   "entity.lost.dakosaurus": "Dakosaurus",
@@ -56,5 +63,7 @@
   "entity.lost.hypsocormus": "Hypsocormus",
   "entity.lost.tepexichthys": "Tepexichthys",
   "entity.lost.pelecanimimus": "Pelecanimimus",
-  "entity.lost.mirarce": "Mirarce"
+  "entity.lost.mirarce": "Mirarce",
+
+  "tooltip.lost.concavenator_mask": "Grants strength"
 }

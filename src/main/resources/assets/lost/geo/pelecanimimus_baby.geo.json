@@ -1,0 +1,72 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "Pelecanimimus",
+					"pivot": [0, 8, 3]
+				},
+				{
+					"name": "Body",
+					"parent": "Pelecanimimus",
+					"pivot": [0, 12, 3],
+					"cubes": [
+						{"origin": [-3, 6, -3], "size": [6, 6, 6], "uv": [0, 0]},
+						{"origin": [-1, 9, 3], "size": [2, 2, 5], "uv": [17, 18]},
+						{"origin": [0, 8, -4], "size": [0, 5, 8], "uv": [13, 4]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Body",
+					"pivot": [0, 12, 0],
+					"cubes": [
+						{"origin": [-1, 12, -9], "size": [2, 2, 9], "uv": [0, 12]},
+						{"origin": [0, 13, -3], "size": [0, 2, 4], "uv": [0, 8]}
+					]
+				},
+				{
+					"name": "LeftLeg",
+					"parent": "Pelecanimimus",
+					"pivot": [2.5, 6, 2.5],
+					"cubes": [
+						{"origin": [2, 0.1, 2.5], "size": [1, 6, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "LeftFoot",
+					"parent": "LeftLeg",
+					"pivot": [2, 0, 2.5],
+					"cubes": [
+						{"origin": [2.5, 0.1, -2.5], "size": [5, 0, 5], "pivot": [2.5, 0.1, 2.5], "rotation": [0, 22.5, 0], "uv": [13, 0]}
+					]
+				},
+				{
+					"name": "RightLeg",
+					"parent": "Pelecanimimus",
+					"pivot": [-2.5, 6, 2.5],
+					"cubes": [
+						{"origin": [-3, 0.1, 2.5], "size": [1, 6, 0], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "RightFoot",
+					"parent": "RightLeg",
+					"pivot": [-2, 0, 2.5],
+					"cubes": [
+						{"origin": [-7.5, 0.1, -2.5], "size": [5, 0, 5], "pivot": [-2.5, 0.1, 2.5], "rotation": [0, -22.5, 0], "uv": [13, 0], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}

@@ -50,6 +50,7 @@ public class ClientEvents {
 
     private static void registerBlockRenderer() {
         RenderTypeLookup.setRenderLayer(BlockInit.DIPLOMOCERAS_SHELL.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.DUCKWEED.get(), RenderType.getCutout());
     }
 
     private static void armorModel(){

@@ -1,6 +1,7 @@
 package com.rena.lost.core.datagen.server;
 
 import com.rena.lost.LostInTime;
+import com.rena.lost.core.init.ItemInit;
 import com.rena.lost.core.tag.LostTag;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -18,7 +19,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void registerTags() {
         //add more food here
-        getOrCreateBuilder(LostTag.Items.RAW_FISHES).add(Items.SALMON).add(Items.COD).add(Items.TROPICAL_FISH).add(Items.PUFFERFISH);
-        getOrCreateBuilder(LostTag.Items.COOKED_FISHES).add(Items.COOKED_SALMON).add(Items.COOKED_COD);
+        getOrCreateBuilder(LostTag.Items.RAW_FISHES).add(Items.SALMON).add(Items.COD).add(Items.TROPICAL_FISH).add(Items.PUFFERFISH).add(ItemInit.HYPSOCORMUS.get()).add(ItemInit.TEPEXICHTHYS.get());
+        getOrCreateBuilder(LostTag.Items.COOKED_FISHES).add(Items.COOKED_SALMON).add(Items.COOKED_COD).add(ItemInit.COOKED_HYPSOCORMUS.get()).add(ItemInit.COOKED_TEPEXICHTHYS.get());
     }
 }

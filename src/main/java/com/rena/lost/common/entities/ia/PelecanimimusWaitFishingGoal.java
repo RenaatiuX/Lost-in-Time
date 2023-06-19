@@ -22,7 +22,7 @@ public class PelecanimimusWaitFishingGoal extends Goal {
 
     @Override
     public boolean shouldExecute() {
-        return !pelecanimimus.isFishing() && (this.pelecanimimus.isTamed() ? pelecanimimus.fishingCondition() : !hasFishingCooldown());
+        return !pelecanimimus.isChild() && !pelecanimimus.isFishing() && (this.pelecanimimus.isTamed() ? pelecanimimus.fishingCondition() : !hasFishingCooldown());
     }
 
 

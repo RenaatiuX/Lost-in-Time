@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "lost:block/purple_bricks_slab"
+    },
+    "type=double": {
+      "model": "lost:block/purple_bricks"
+    },
+    "type=top": {
+      "model": "lost:block/purple_bricks_slab_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "lost:block/purple_bricks",
+    "top": "lost:block/purple_bricks",
+    "side": "lost:block/purple_bricks"
+  }
+}

@@ -3,6 +3,7 @@ package com.rena.lost.common.items;
 import com.rena.lost.LostInTime;
 import com.rena.lost.client.model.ConcavenatorMaskModel;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,12 +13,16 @@ import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConcavenatorMaskItem extends ArmorItem {
@@ -52,5 +57,11 @@ public class ConcavenatorMaskItem extends ArmorItem {
         if(this.slot == EquipmentSlotType.HEAD) {
             player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 100, 0));
         }
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent("tooltip.lost.concavenator_mask").mergeStyle(TextFormatting.GOLD));
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 }

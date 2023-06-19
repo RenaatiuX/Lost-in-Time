@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "minecraft:cooked_salmon",
-    "minecraft:cooked_cod"
+    "minecraft:cooked_cod",
+    "lost:cooked_hypsocormus",
+    "lost:cooked_tepexichthys"
   ]
 }
