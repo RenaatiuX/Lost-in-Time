@@ -29,7 +29,7 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class SahonachelysEggBlock extends Block {
+public class SahonachelysEggBlock extends Block implements IEggBlock{
     private static final VoxelShape ONE_EGG_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 12.0D, 7.0D, 12.0D);
     private static final VoxelShape MULTI_EGG_SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 7.0D, 15.0D);
     public static final IntegerProperty HATCH = BlockStateProperties.HATCH_0_2;
@@ -77,7 +77,7 @@ public class SahonachelysEggBlock extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        if (this.canGrow(worldIn) && hasProperHabitat(worldIn, pos)) {
+        if (this.canGrow(worldIn, random) && hasProperHabitat(worldIn, pos)) {
             int i = state.get(HATCH);
             if (i < 2) {
                 worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_TURTLE_EGG_CRACK, SoundCategory.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
@@ -87,12 +87,7 @@ public class SahonachelysEggBlock extends Block {
                 worldIn.removeBlock(pos, false);
 
                 for(int j = 0; j < state.get(EGGS); ++j) {
-                    worldIn.playEvent(2001, pos, Block.getStateId(state));
-                    Sahonachelys sahonachelys = EntityInit.SAHONACHELYS.get().create(worldIn);
-                    sahonachelys.setGrowingAge(-24000);
-                    sahonachelys.setHomePosAndDistance(pos, 20);
-                    sahonachelys.setLocationAndAngles((double)pos.getX() + 0.3D + (double)j * 0.2D, (double)pos.getY(), (double)pos.getZ() + 0.3D, 0.0F, 0.0F);
-                    worldIn.addEntity(sahonachelys);
+                   spawnEntity(state, worldIn, pos, random);
                 }
             }
         }
@@ -111,15 +106,6 @@ public class SahonachelysEggBlock extends Block {
     public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
         if (hasProperHabitat(worldIn, pos) && !worldIn.isRemote) {
             worldIn.playEvent(2005, pos, 0);
-        }
-    }
-
-    private boolean canGrow(World worldIn) {
-        float f = worldIn.func_242415_f(1.0F);
-        if ((double)f < 0.69D && (double)f > 0.65D) {
-            return true;
-        } else {
-            return worldIn.rand.nextInt(500) == 0;
         }
     }
 
@@ -160,6 +146,26 @@ public class SahonachelysEggBlock extends Block {
             }
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public void spawnEntity(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+        worldIn.playEvent(2001, pos, Block.getStateId(state));
+        Sahonachelys sahonachelys = EntityInit.SAHONACHELYS.get().create(worldIn);
+        sahonachelys.setGrowingAge(-24000);
+        sahonachelys.setHomePosAndDistance(pos, 20);
+        sahonachelys.setLocationAndAngles((double)pos.getX() + 0.3D, (double)pos.getY(), (double)pos.getZ() + 0.3D, 0.0F, 0.0F);
+        worldIn.addEntity(sahonachelys);
+    }
+
+    @Override
+    public boolean canGrow(ServerWorld worldIn, Random random) {
+        float f = worldIn.func_242415_f(1.0F);
+        if ((double)f < 0.69D && (double)f > 0.65D) {
+            return true;
+        } else {
+            return worldIn.rand.nextInt(500) == 0;
         }
     }
 }

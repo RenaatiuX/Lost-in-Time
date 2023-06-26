@@ -11,6 +11,8 @@ public class LostTag {
 
         public static final ITag.INamedTag<Item> RAW_FISHES = mod("raw_fishes");
         public static final ITag.INamedTag<Item> COOKED_FISHES = mod("cooked_fishes");
+
+
         public static ITag.INamedTag<Item> mod(String name){
             return ItemTags.makeWrapperTag(LostInTime.modLoc(name).toString());
         }

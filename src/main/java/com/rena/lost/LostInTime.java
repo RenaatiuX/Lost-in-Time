@@ -1,10 +1,7 @@
 package com.rena.lost;
 
 import com.rena.lost.common.entities.*;
-import com.rena.lost.core.init.BlockInit;
-import com.rena.lost.core.init.EntityInit;
-import com.rena.lost.core.init.ItemInit;
-import com.rena.lost.core.init.TileEntityInit;
+import com.rena.lost.core.init.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -49,6 +46,7 @@ public class LostInTime
         BlockInit.BLOCKS.register(modEventBus);
         EntityInit.ENTITY_TYPES.register(modEventBus);
         TileEntityInit.TILE_ENTITIES.register(modEventBus);
+        ContainerInit.CONTAINER_TYPES.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event)

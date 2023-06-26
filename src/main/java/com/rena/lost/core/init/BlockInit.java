@@ -21,6 +21,8 @@ public class BlockInit {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LostInTime.MOD_ID);
 
+    public static final RegistryObject<NestBlock> NEST_BLOCK = register("nest", NestBlock::new, LostItemGroup.LOST_TAB);
+
     public static final RegistryObject<Block> TRANQUILIZER = register("tranquilizer",
             () -> new TranquilizerBlock(AbstractBlock.Properties.create(Material.IRON)
                     .hardnessAndResistance(0.6F).sound(SoundType.METAL).setRequiresTool()
