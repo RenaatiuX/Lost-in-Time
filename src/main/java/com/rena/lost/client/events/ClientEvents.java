@@ -57,6 +57,14 @@ public class ClientEvents {
         RenderTypeLookup.setRenderLayer(BlockInit.DIPLOMOCERAS_SHELL.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.DUCKWEED.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.NEST_BLOCK.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.ARCHAEFRUCTUS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.APIOCRINUS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.CLADOPHLEBIS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.QUILLWORT_1.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.QUILLWORT_2.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.SEIROCRINUS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.SEIROCRINUS_PLANT.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.WEICHSELIA.get(), RenderType.getCutout());
     }
 
     private static void armorModel(){
