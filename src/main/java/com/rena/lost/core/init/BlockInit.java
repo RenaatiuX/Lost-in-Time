@@ -9,6 +9,8 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -75,7 +77,32 @@ public class BlockInit {
     public static final RegistryObject<Block> DUCKWEED = BLOCKS.register("duckweed",
             () -> new DuckWeedBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
                     .zeroHardnessAndResistance().sound(SoundType.LILY_PADS).notSolid()));
-
+    public static final RegistryObject<Block> ARCHAEFRUCTUS = register("archaefructus",
+            () -> new ArchaefructusBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> APIOCRINUS = register("apiocrinus",
+            () -> new ApiocrinusBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block>  CLADOPHLEBIS = register("cladophlebis",
+            () -> new LostFlowerPlantBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> QUILLWORT_1 = register("quillwort_1",
+            () -> new QuillwortBlock(AbstractBlock.Properties.create(Material.SEA_GRASS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> QUILLWORT_2 = register("quillwort_2",
+            () -> new QuillwortBlock(AbstractBlock.Properties.create(Material.SEA_GRASS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> SEIROCRINUS = register("seirocrinus",
+            () -> new SeirocrinusTopBlock(AbstractBlock.Properties.create(Material.OCEAN_PLANT)
+                    .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.WET_GRASS)
+                    , Direction.DOWN, SeirocrinusTopBlock.SHAPE, true, 0.14D), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> SEIROCRINUS_PLANT = BLOCKS.register("seirocrinus_plant",
+            () -> new SeirocrinusBlock(AbstractBlock.Properties.create(Material.OCEAN_PLANT)
+                    .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.WET_GRASS)
+                    , Direction.DOWN, VoxelShapes.fullCube(), true));
+    public static final RegistryObject<Block> WEICHSELIA = register("weichselia",
+            () -> new TallFlowerBlock(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
     public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab){
         return register(name, blockSupplier, b -> new BlockItem(b, new Item.Properties().group(tab)));
     }

@@ -1,4 +1,4 @@
-package com.rena.lost.common.blocks;
+package com.rena.lost.common.blocks.util;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.SoundEvent;

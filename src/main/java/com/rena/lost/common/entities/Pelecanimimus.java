@@ -181,7 +181,7 @@ public class Pelecanimimus extends TameableEntity implements IAnimatable, IAnima
     }
 
     public void spawnFishItem() {
-        Item fishItem = ItemTags.FISHES.getRandomElement(this.rand);
+        Item fishItem = LostTag.Items.RAW_FISHES.getRandomElement(this.rand);
         ItemStack fishItemStack = new ItemStack(fishItem);
         if (!this.world.isRemote) {
             this.entityDropItem(fishItemStack);

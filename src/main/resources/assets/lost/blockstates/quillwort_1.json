@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "lost:block/quillwort_bottom_1"
+    },
+    "half=upper": {
+      "model": "lost:block/quillwort_top_1"
+    }
+  }
+}

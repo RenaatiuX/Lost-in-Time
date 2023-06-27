@@ -1,5 +1,6 @@
 package com.rena.lost.common.blocks;
 
+import com.rena.lost.common.blocks.util.IEggBlock;
 import com.rena.lost.common.entities.Sahonachelys;
 import com.rena.lost.core.init.BlockInit;
 import com.rena.lost.core.init.EntityInit;
@@ -29,7 +30,7 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class SahonachelysEggBlock extends Block implements IEggBlock{
+public class SahonachelysEggBlock extends Block implements IEggBlock {
     private static final VoxelShape ONE_EGG_SHAPE = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 12.0D, 7.0D, 12.0D);
     private static final VoxelShape MULTI_EGG_SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 7.0D, 15.0D);
     public static final IntegerProperty HATCH = BlockStateProperties.HATCH_0_2;
