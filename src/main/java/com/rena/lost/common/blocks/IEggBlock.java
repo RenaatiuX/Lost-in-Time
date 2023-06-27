@@ -1,6 +1,8 @@
 package com.rena.lost.common.blocks;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 
@@ -17,4 +19,20 @@ public interface IEggBlock {
      * this defines if the egg can grow
      */
     boolean canGrow(ServerWorld worldIn, Random random);
+
+    /**
+     *
+     * @return the sound the egg wil make when growing older
+     */
+    default SoundEvent getEggAgingSound(){
+        return SoundEvents.ENTITY_TURTLE_EGG_HATCH;
+    }
+
+    /**
+     *
+     * @return the sound that the egg will make when hatching into an entity
+     */
+    default SoundEvent getHatchingSound(){
+        return getEggAgingSound();
+    }
 }

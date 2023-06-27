@@ -1,10 +1,12 @@
 package com.rena.lost.common.tileentities;
 
+import com.rena.lost.api.NestEggApi;
 import com.rena.lost.common.blocks.IEggBlock;
 import com.rena.lost.core.init.BlockInit;
 import com.rena.lost.core.init.TileEntityInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -12,6 +14,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -33,7 +37,7 @@ public class NestBlockTe extends TileEntity {
 
         @Override
         public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-            return stack.getItem() instanceof BlockItem && ((BlockItem) stack.getItem()).getBlock() instanceof IEggBlock;
+            return NestEggApi.isValidEgg(stack.getItem());
         }
     };
 
@@ -80,29 +84,30 @@ public class NestBlockTe extends TileEntity {
         if (!world.isRemote) {
             for (int i = 0; i < this.inventory.getSlots(); i++) {
                 ItemStack stack = this.inventory.getStackInSlot(i);
-                if (stack.getItem() instanceof BlockItem) {
-                    Block block = ((BlockItem) stack.getItem()).getBlock();
-                    if (block instanceof IEggBlock) {
-
-                        if (((IEggBlock) block).canGrow(world, rand)) {
+                if (NestEggApi.isValidEgg(stack.getItem())) {
+                    IEggBlock egg = NestEggApi.getEgg(stack.getItem());
+                    boolean growth = false;
+                    if (egg.canGrow(world, rand)) {
+                        this.hatchingStates.set(i, this.hatchingStates.get(i) + 1);
+                        growth = true;
+                    }
+                    if (this.hatchingStates.get(i) >= 2) {
+                        resetHatching(world, egg, i, rand);
+                        growth = false;
+                        continue;
+                    }
+                    if (rand.nextInt(10) <= 9) {
+                        if (egg.canGrow(world, rand)) {
                             this.hatchingStates.set(i, this.hatchingStates.get(i) + 1);
-                            System.out.println("test");
+                            growth = true;
                         }
                         if (this.hatchingStates.get(i) >= 2) {
-                            resetHatching(world, (IEggBlock) block, i, rand);
-                            continue;
-                        }
-                        if (rand.nextInt(10) <= 9) {
-                            if (((IEggBlock) block).canGrow(world, rand)) {
-                                this.hatchingStates.set(i, this.hatchingStates.get(i) + 1);
-                                System.out.println("test");
-                            }
-                            if (this.hatchingStates.get(i) >= 2) {
-                                resetHatching(world, (IEggBlock) block, i, rand);
-                                continue;
-                            }
+                            resetHatching(world, egg, i, rand);
+                            growth = false;
                         }
                     }
+                    if (growth)
+                        this.world.playSound((PlayerEntity) null, pos, egg.getEggAgingSound(), SoundCategory.BLOCKS, 0.7F, 0.9F + rand.nextFloat() * 0.2F);
                 }
             }
         }
@@ -126,7 +131,7 @@ public class NestBlockTe extends TileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-       this.read(getBlockState(), pkt.getNbtCompound());
+        this.read(getBlockState(), pkt.getNbtCompound());
     }
 
     @Override
@@ -150,5 +155,6 @@ public class NestBlockTe extends TileEntity {
         this.hatchingStates.set(index, 0);
         this.inventory.setStackInSlot(index, ItemStack.EMPTY);
         this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
+        world.playSound((PlayerEntity) null, pos, egg.getHatchingSound(), SoundCategory.BLOCKS, 0.7F, 0.9F + rand.nextFloat() * 0.2F);
     }
 }

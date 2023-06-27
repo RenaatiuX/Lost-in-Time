@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.items.IItemHandler;
@@ -31,7 +32,7 @@ public class NestTeContainer extends Container {
         this(id, inventory, getClientTileEntity(inventory, buffer));
     }
 
-    protected void init(){
+    protected void init() {
         addPlayerInventory(8, 51);
 
         addHorizontalSlots(te.getInventory(), 0, 37, 20, 6, 18);
@@ -42,7 +43,31 @@ public class NestTeContainer extends Container {
         return isWithinUsableDistance(this.canInteractWithCallable, playerIn, te.getBlockState().getBlock());
     }
 
-    private static NestBlockTe getClientTileEntity(PlayerInventory inventory, PacketBuffer buffer){
+    @Override
+    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+        ItemStack stack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(index);
+        int teInvSize = te.getInventory().getSlots();
+        if (slot != null && slot.getHasStack()) {
+            ItemStack stack1 = slot.getStack();
+            stack = stack1.copy();
+            System.out.println(index);
+            if (index < teInvSize && !this.mergeItemStack(stack1, teInvSize, this.inventorySlots.size(), true))
+                return ItemStack.EMPTY;
+            if (!this.mergeItemStack(stack1, 0, teInvSize - 1, false))
+                return ItemStack.EMPTY;
+            slot.onSlotChange(stack1, stack);
+            if (stack1.isEmpty()) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+            slot.onTake(playerIn, stack1);
+        }
+        return stack;
+    }
+
+    private static NestBlockTe getClientTileEntity(PlayerInventory inventory, PacketBuffer buffer) {
         return (NestBlockTe) inventory.player.world.getTileEntity(buffer.readBlockPos());
     }
 
@@ -93,7 +118,7 @@ public class NestTeContainer extends Container {
         addHorizontalSlots(playerInv, 0, x, y, 9, 18);
     }
 
-    public static interface IItemHandlerSlotProvider{
+    public static interface IItemHandlerSlotProvider {
         Slot createSlot(IItemHandler handler, int index, int x, int y);
     }
 }
