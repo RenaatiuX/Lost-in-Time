@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -22,7 +23,6 @@ import java.util.function.Supplier;
 
 public class CustomEggEntity extends ProjectileItemEntity {
 
-    protected Item item;
     protected Supplier<EntityType<? extends AnimalEntity>> entityTypeSupplier;
 
     public CustomEggEntity(EntityType<? extends CustomEggEntity> type, World worldIn) {
@@ -31,13 +31,13 @@ public class CustomEggEntity extends ProjectileItemEntity {
 
     public CustomEggEntity(World worldIn, LivingEntity throwerIn, Item item, Supplier<EntityType<? extends AnimalEntity>> entityTypeSupplier) {
         super(EntityInit.CUSTOM_EGG.get(), throwerIn, worldIn);
-        this.item = item;
+        setItem(item.getDefaultInstance());
         this.entityTypeSupplier = entityTypeSupplier;
     }
 
     public CustomEggEntity(World worldIn, double x, double y, double z, Item item, Supplier<EntityType<? extends AnimalEntity>> entityTypeSupplier) {
         super(EntityInit.CUSTOM_EGG.get(), x, y, z, worldIn);
-        this.item = item;
+        setItem(item.getDefaultInstance());
         this.entityTypeSupplier = entityTypeSupplier;
     }
 
@@ -81,12 +81,12 @@ public class CustomEggEntity extends ProjectileItemEntity {
     }
 
     @Override
-    protected Item getDefaultItem() {
-        return this.item;
+    public IPacket<?> createSpawnPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
+    protected Item getDefaultItem() {
+        return Items.GRASS;
     }
 }
