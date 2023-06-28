@@ -29,6 +29,10 @@ public class CustomEggEntity extends ProjectileItemEntity {
         super(type, worldIn);
     }
 
+    public CustomEggEntity(World worldIn, double x, double y, double z) {
+        super(EntityInit.CUSTOM_EGG.get(), x, y, z, worldIn);
+    }
+
     public CustomEggEntity(World worldIn, LivingEntity throwerIn, Item item, Supplier<EntityType<? extends AnimalEntity>> entityTypeSupplier) {
         super(EntityInit.CUSTOM_EGG.get(), throwerIn, worldIn);
         setItem(item.getDefaultInstance());
