@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "lost:raw_pelecanimimus_meat"
+  },
+  "result": "lost:cooked_pelecanimimus_meat",
+  "experience": 0.35,
+  "cookingtime": 200
+}

@@ -2,6 +2,10 @@ package com.rena.lost.common.items;
 
 import com.rena.lost.common.entities.Hypsocormus;
 import com.rena.lost.common.entities.Tepexichthys;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -10,9 +14,11 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -44,7 +50,7 @@ public class LostFishBucketItem extends BucketItem {
             ((Hypsocormus) entity).setFromBucket(true);
         }
         if (entity instanceof Tepexichthys) {
-            ((Hypsocormus) entity).setFromBucket(true);
+            ((Tepexichthys) entity).setFromBucket(true);
         }
     }
 

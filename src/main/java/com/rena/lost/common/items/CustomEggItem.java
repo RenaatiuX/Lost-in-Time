@@ -32,10 +32,17 @@ public class CustomEggItem extends Item {
         worldIn.playSound((PlayerEntity)null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         if (!worldIn.isRemote) {
             ProjectileItemEntity eggEntity;
-            eggEntity = new CustomEggEntity(worldIn, playerIn, itemstack.getItem(), entityTypeSupplier);
-            eggEntity.setItem(itemstack);
-            eggEntity.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-            worldIn.addEntity(eggEntity);
+            if (this == ItemInit.PELECANIMIMUS_EGG.get()) {
+                eggEntity = new CustomEggEntity(worldIn, playerIn, this, entityTypeSupplier);
+                eggEntity.setItem(itemstack);
+                eggEntity.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+                worldIn.addEntity(eggEntity);
+            } else if (this == ItemInit.MIRARCE_EGG.get()) {
+                eggEntity = new CustomEggEntity(worldIn, playerIn, this, entityTypeSupplier);
+                eggEntity.setItem(itemstack);
+                eggEntity.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+                worldIn.addEntity(eggEntity);
+            }
         }
 
         playerIn.addStat(Stats.ITEM_USED.get(this));

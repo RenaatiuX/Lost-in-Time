@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 public class LostItemGroup {
 
-    public static final ItemGroup LOST_TAB = new ItemGroup("lostGroup") {
+    public static final ItemGroup LOST_TAB = new ItemGroup("lost_group") {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ItemInit.CONCAVENATOR_MASK.get());

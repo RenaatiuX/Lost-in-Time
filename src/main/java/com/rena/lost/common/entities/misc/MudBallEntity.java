@@ -57,10 +57,8 @@ public class MudBallEntity extends ProjectileItemEntity {
     protected void onEntityHit(EntityRayTraceResult result) {
         super.onEntityHit(result);
         Entity entity = result.getEntity();
-        LivingEntity livingEntity = (LivingEntity) result.getEntity();
         int i = entity instanceof BlazeEntity ? 3 : 0;
         entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getShooter()), (float)i);
-        livingEntity.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 40));
     }
 
     /**
@@ -70,6 +68,12 @@ public class MudBallEntity extends ProjectileItemEntity {
     protected void onImpact(RayTraceResult result) {
         super.onImpact(result);
         if (!this.world.isRemote) {
+            if (result.getType() == RayTraceResult.Type.ENTITY) {
+                Entity entity = ((EntityRayTraceResult) result).getEntity();
+                if (entity instanceof LivingEntity) {
+                    ((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.BLINDNESS, 40));
+                }
+            }
             this.world.setEntityState(this, (byte)3);
             this.remove();
         }
