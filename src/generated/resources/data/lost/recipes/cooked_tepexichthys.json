@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "lost:tepexichthys"
+  },
+  "result": "lost:cooked_tepexichthys",
+  "experience": 0.35,
+  "cookingtime": 200
+}

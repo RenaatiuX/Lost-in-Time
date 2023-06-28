@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "lost:purple_bricks"
+    }
+  },
+  "result": {
+    "item": "lost:purple_bricks_pillar",
+    "count": 2
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lost:brown_clay"
+    }
+  ],
+  "result": {
+    "item": "lost:brown_clay_ball",
+    "count": 4
+  }
+}

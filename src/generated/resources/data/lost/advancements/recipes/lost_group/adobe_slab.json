@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lost:adobe_brick"
+      "lost:adobe_slab"
     ]
   },
   "criteria": {
@@ -11,10 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:grass"
-          },
-          {
-            "item": "minecraft:tall_grass"
+            "item": "lost:adobe_bricks"
           }
         ]
       }
@@ -22,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lost:adobe_brick"
+        "recipe": "lost:adobe_slab"
       }
     }
   },

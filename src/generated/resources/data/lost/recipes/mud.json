@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "lost:mud_ball"
+    }
+  },
+  "result": {
+    "item": "lost:mud"
+  }
+}

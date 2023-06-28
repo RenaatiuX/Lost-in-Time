@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lost:adobe_brick"
+      "lost:purple_bricks"
     ]
   },
   "criteria": {
@@ -11,10 +11,10 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:grass"
+            "item": "minecraft:stone_bricks"
           },
           {
-            "item": "minecraft:tall_grass"
+            "item": "lost:voidite_fragment"
           }
         ]
       }
@@ -22,7 +22,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lost:adobe_brick"
+        "recipe": "lost:purple_bricks"
       }
     }
   },
