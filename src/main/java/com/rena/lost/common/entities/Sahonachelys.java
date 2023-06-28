@@ -134,7 +134,6 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
     public void tick() {
         super.tick();
         if (!this.world.isRemote) {
-
             if (this.isInWater()) {
                 if (hasMoss()) {
                     if (mossTime > MOSS_COOLDOWN || this.rand.nextDouble() < (double) mossTime / (double) MOSS_COOLDOWN) {
@@ -148,8 +147,10 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
             if (this.buttonPressAnimationCooldown == 0 && isPressingButton()) {
                 setPressingButton(false);
                 BlockState buttonState = this.world.getBlockState(this.buttonPos);
-                AbstractButtonBlock button = (AbstractButtonBlock) buttonState.getBlock();
-                button.powerBlock(buttonState, this.world, this.buttonPos);
+                if (buttonState.getBlock() instanceof AbstractButtonBlock) {
+                    AbstractButtonBlock button = (AbstractButtonBlock) buttonState.getBlock();
+                    button.powerBlock(buttonState, this.world, this.buttonPos);
+                }
                 this.buttonPos = null;
             }
             if (this.buttonPressAnimationCooldown > 0) {
@@ -549,7 +550,9 @@ public class Sahonachelys extends AnimalEntity implements ISemiAquatic, IAnimata
                         BlockPos buttonPos = entityPos.add(x, y, z);
                         BlockState blockState = this.sahonachelys.world.getBlockState(buttonPos);
                         if (blockState.getBlock() instanceof AbstractButtonBlock) {
-                            this.buttonPositions.add(buttonPos);
+                            Direction facing = blockState.get(AbstractButtonBlock.HORIZONTAL_FACING);
+                            if (facing != Direction.DOWN && facing != Direction.UP)
+                                this.buttonPositions.add(buttonPos);
                         }
                     }
                 }
