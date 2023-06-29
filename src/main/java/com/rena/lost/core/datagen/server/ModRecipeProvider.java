@@ -1,11 +1,14 @@
 package com.rena.lost.core.datagen.server;
 
+import com.rena.lost.LostInTime;
 import com.rena.lost.core.init.BlockInit;
 import com.rena.lost.core.init.ItemInit;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.CookingRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 
@@ -32,9 +35,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
         ShapedRecipeBuilder.shapedRecipe(BlockInit.ADOBE_BRICKS.get())
                 .key('u', Ingredient.fromItems(ItemInit.ADOBE_BRICK.get()))
-                .patternLine("uuu")
-                .patternLine("uuu")
-                .patternLine("uuu")
+                .patternLine("uu")
+                .patternLine("uu")
                 .addCriterion("hasItem", hasItem(ItemInit.ADOBE_BRICK.get())).build(consumer);
 
         ShapedRecipeBuilder.shapedRecipe(BlockInit.ADOBE_SLAB.get(), 6)
@@ -187,5 +189,23 @@ public class ModRecipeProvider extends RecipeProvider {
         CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ItemInit.TEPEXICHTHYS.get()), ItemInit.COOKED_TEPEXICHTHYS.get(), 0.35F, 200)
                 .addCriterion("hasItem", hasItem(ItemInit.TEPEXICHTHYS.get())).build(consumer);
 
+        cookingRecipesForMethod(consumer, "smoking", IRecipeSerializer.SMOKING, 100);
+        cookingRecipesForMethod(consumer, "campfire_cooking", IRecipeSerializer.CAMPFIRE_COOKING, 600);
+
+    }
+
+    private void cookingRecipesForMethod(Consumer<IFinishedRecipe> recipeConsumer, String recipeConsumerIn, CookingRecipeSerializer<?> cookingMethod, int serializerIn) {
+        CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ItemInit.RAW_DAKOSAURUS_MEAT.get()),
+                        ItemInit.COOKED_DAKOSAURUS_MEAT.get(), 0.35F, serializerIn, cookingMethod)
+                .addCriterion("hasItem", hasItem(ItemInit.RAW_DAKOSAURUS_MEAT.get())).build(recipeConsumer, LostInTime.modLoc("cooked_dakosaurus_meat_from_" + recipeConsumerIn));
+        CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ItemInit.HYPSOCORMUS.get()),
+                        ItemInit.COOKED_HYPSOCORMUS.get(), 0.35F, serializerIn, cookingMethod)
+                .addCriterion("hasItem", hasItem(ItemInit.HYPSOCORMUS.get())).build(recipeConsumer, LostInTime.modLoc("cooked_hypsocormus_meat_from_" + recipeConsumerIn));
+        CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ItemInit.RAW_PELECANIMIMUS_MEAT.get()),
+                        ItemInit.COOKED_PELECANIMIMUS_MEAT.get(), 0.35F, serializerIn, cookingMethod)
+                .addCriterion("hasItem", hasItem(ItemInit.RAW_PELECANIMIMUS_MEAT.get())).build(recipeConsumer, LostInTime.modLoc("cooked_pelecanimimus_meat_from_" + recipeConsumerIn));
+        CookingRecipeBuilder.cookingRecipe(Ingredient.fromItems(ItemInit.TEPEXICHTHYS.get()),
+                        ItemInit.COOKED_TEPEXICHTHYS.get(), 0.35F, serializerIn, cookingMethod)
+                .addCriterion("hasItem", hasItem(ItemInit.TEPEXICHTHYS.get())).build(recipeConsumer, LostInTime.modLoc("cooked_tepexichthys_meat_from_" + recipeConsumerIn));
     }
 }

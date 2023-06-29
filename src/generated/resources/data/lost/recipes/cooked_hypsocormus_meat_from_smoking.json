@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "lost:hypsocormus"
+  },
+  "result": "lost:cooked_hypsocormus",
+  "experience": 0.35,
+  "cookingtime": 100
+}

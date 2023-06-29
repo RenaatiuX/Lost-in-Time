@@ -1,9 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "uuu",
-    "uuu",
-    "uuu"
+    "uu",
+    "uu"
   ],
   "key": {
     "u": {

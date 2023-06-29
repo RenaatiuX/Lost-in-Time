@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "lost:raw_dakosaurus_meat"
+  },
+  "result": "lost:cooked_dakosaurus_meat",
+  "experience": 0.35,
+  "cookingtime": 100
+}
