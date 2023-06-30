@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "UUU",
+    "UXU",
+    "UUU"
+  ],
+  "key": {
+    "U": {
+      "tag": "lost:tooths"
+    },
+    "X": {
+      "item": "lost:wooden_mace"
+    }
+  },
+  "result": {
+    "item": "lost:tooth_mace"
+  }
+}

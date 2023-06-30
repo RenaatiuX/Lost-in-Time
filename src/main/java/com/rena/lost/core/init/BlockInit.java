@@ -10,7 +10,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -73,6 +75,11 @@ public class BlockInit {
             () -> new Block(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool()
                     .hardnessAndResistance(3.0F, 3.0F).harvestTool(ToolType.PICKAXE)
                     .harvestLevel(2)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> AMBER_BLOCK = register("amber_block",
+            () -> new AmberBlock(AbstractBlock.Properties.create(Material.CLAY, MaterialColor.ADOBE)
+                    .setRequiresTool().hardnessAndResistance(2.0F, 3.0F)
+                    .notSolid().setOpaque(BlockInit::isntSolid).setSuffocates(BlockInit::isntSolid).setBlocksVision(BlockInit::isntSolid)
+                    .harvestTool(ToolType.PICKAXE).sound(SoundType.BONE)), LostItemGroup.LOST_TAB);
 
     public static final RegistryObject<Block> DUCKWEED = BLOCKS.register("duckweed",
             () -> new DuckWeedBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
@@ -103,6 +110,13 @@ public class BlockInit {
     public static final RegistryObject<Block> WEICHSELIA = register("weichselia",
             () -> new TallFlowerBlock(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement()
                     .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ANCIENT_MOSS = register("ancient_moss",
+            () -> new Block(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F)
+                    .sound(SoundType.PLANT).notSolid()), LostItemGroup.LOST_TAB);
+
+    private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
+        return false;
+    }
     public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab){
         return register(name, blockSupplier, b -> new BlockItem(b, new Item.Properties().group(tab)));
     }

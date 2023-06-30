@@ -38,6 +38,7 @@
   "item.lost.tooth_mace": "Tooth Mace",
   "item.lost.wooden_mace": "Wooden Mace",
   "item.lost.duckweed": "Duckweed",
+  "item.lost.amber": "Amber",
 
   "block.lost.mud": "Mud",
   "block.lost.tranquilizer": "Tranquilizer",
@@ -64,6 +65,8 @@
   "block.lost.quillwort_2": "Quillwort",
   "block.lost.seirocrinus": "Seirocrinus",
   "block.lost.weichselia": "Weichselia",
+  "block.lost.amber_block": "Amber Block",
+  "block.lost.ancient_moss": "Ancient Moss",
 
   "entity.lost.sahonachelys": "Sahonachelys",
   "entity.lost.dakosaurus": "Dakosaurus",

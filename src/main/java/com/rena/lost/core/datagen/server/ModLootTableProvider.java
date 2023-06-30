@@ -6,13 +6,18 @@ import com.mojang.datafixers.util.Pair;
 import com.rena.lost.core.init.BlockInit;
 import com.rena.lost.core.init.EntityInit;
 import com.rena.lost.core.init.ItemInit;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
+import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.EntityHasProperty;
+import net.minecraft.loot.conditions.ILootCondition;
+import net.minecraft.loot.conditions.MatchTool;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.Smelt;
@@ -31,7 +36,7 @@ public class ModLootTableProvider extends LootTableProvider {
 
     @Override
     protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
-        return ImmutableList.of(Pair.of(EntityLootTable::new, LootParameterSets.ENTITY));
+        return ImmutableList.of(Pair.of(EntityLootTable::new, LootParameterSets.ENTITY), Pair.of(BlockLootTable::new, LootParameterSets.BLOCK));
     }
 
     @Override
@@ -61,6 +66,52 @@ public class ModLootTableProvider extends LootTableProvider {
         protected void registerLootTable(EntityType<?> type, LootTable.Builder table) {
             super.registerLootTable(type, table);
             this.knownEntities.add(type);
+        }
+    }
+
+    public static class BlockLootTable extends BlockLootTables {
+        private List<Block> knownBlocks = Lists.newArrayList();
+
+        @Override
+        protected void addTables() {
+            this.registerDropSelfLootTable(BlockInit.ADOBE_BRICKS.get());
+            this.registerLootTable(BlockInit.ADOBE_SLAB.get(), BlockLootTables::droppingSlab);
+            this.registerDropSelfLootTable(BlockInit.ADOBE_STAIRS.get());
+            this.registerDropSelfLootTable(BlockInit.ADOBE_WALL.get());
+            this.registerDropSelfLootTable(BlockInit.AMBER_BLOCK.get());
+            this.registerSilkTouch(BlockInit.SAHONACHELYS_EGG.get());
+            this.registerLootTable(BlockInit.APIOCRINUS.get(), BlockLootTables::onlyWithShears);
+            this.registerLootTable(BlockInit.ARCHAEFRUCTUS.get(), BlockLootTables::onlyWithShears);
+            this.registerDropSelfLootTable(BlockInit.BROWN_CLAY.get());
+            this.registerLootTable(BlockInit.CLADOPHLEBIS.get(), BlockLootTables::onlyWithShears);
+            this.registerDropSelfLootTable(BlockInit.DIPLOMOCERAS_SHELL.get());
+            this.registerLootTable(BlockInit.DUCKWEED.get(), BlockLootTables::onlyWithShears);
+            this.registerDropSelfLootTable(BlockInit.MUD.get());
+            this.registerDropSelfLootTable(BlockInit.NEST_BLOCK.get());
+            this.registerDropSelfLootTable(BlockInit.POLISHED_PURPLE_BRICKS.get());
+            this.registerDropSelfLootTable(BlockInit.PURPLE_BRICKS.get());
+            this.registerLootTable(BlockInit.PURPLE_BRICKS_SLAB.get(), BlockLootTables::droppingSlab);
+            this.registerDropSelfLootTable(BlockInit.PURPLE_BRICKS_STAIRS.get());
+            this.registerDropSelfLootTable(BlockInit.PURPLE_BRICKS_PILLAR.get());
+            this.registerLootTable(BlockInit.QUILLWORT_1.get(), BlockLootTables::onlyWithShears);
+            this.registerLootTable(BlockInit.QUILLWORT_2.get(), BlockLootTables::onlyWithShears);
+            this.registerDropSelfLootTable(BlockInit.VOIDITE_BLOCK.get());
+            this.registerLootTable(BlockInit.VOIDITE_ORE.get(), (voidite) ->
+                    droppingItemWithFortune(voidite, ItemInit.VOIDITE_FRAGMENT.get()));
+            this.registerLootTable(BlockInit.WEICHSELIA.get(), BlockLootTables::onlyWithShears);
+            this.registerDropSelfLootTable(BlockInit.ANCIENT_MOSS.get());
+        }
+
+
+        @Override
+        protected Iterable<Block> getKnownBlocks() {
+            return this.knownBlocks;
+        }
+
+        @Override
+        protected void registerLootTable(Block blockIn, LootTable.Builder table) {
+            super.registerLootTable(blockIn, table);
+            this.knownBlocks.add(blockIn);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.rena.lost.core.datagen.server;
 import com.rena.lost.LostInTime;
 import com.rena.lost.core.init.BlockInit;
 import com.rena.lost.core.init.ItemInit;
+import com.rena.lost.core.tag.LostTag;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
@@ -10,6 +11,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.crafting.CookingRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 
 import java.util.function.Consumer;
@@ -149,13 +151,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .patternLine("X")
                 .addCriterion("hasItem", hasItem(Items.DIAMOND)).build(consumer);
 
-        ShapedRecipeBuilder.shapedRecipe(ItemInit.NETHERITE_SPEAR.get())
-                .key('#', Items.NETHERITE_INGOT)
-                .key('X', Items.STICK)
-                .patternLine("#")
-                .patternLine("X")
-                .patternLine("X")
-                .addCriterion("hasItem", hasItem(Items.NETHERITE_INGOT)).build(consumer);
+        SmithingRecipeBuilder.smithingRecipe(Ingredient.fromItems(ItemInit.DIAMOND_SPEAR.get()), Ingredient.fromItems(Items.NETHERITE_INGOT),
+                ItemInit.NETHERITE_SPEAR.get()).addCriterion("hasItem", hasItem(Items.NETHERITE_INGOT)).build(consumer, LostInTime.modLoc(ItemInit.NETHERITE_SPEAR.get() + "_smithing"));
 
         ShapedRecipeBuilder.shapedRecipe(BlockInit.VOIDITE_BLOCK.get())
                 .key('#', Ingredient.fromItems(ItemInit.VOIDITE_ORB.get()))
@@ -178,6 +175,22 @@ public class ModRecipeProvider extends RecipeProvider {
                 .patternLine("DGD")
                 .patternLine("DDD")
                 .addCriterion("hasItem", hasItem(ItemInit.VOIDITE_CRYSTAL.get())).build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(ItemInit.WOODEN_MACE.get())
+                .key('U', Ingredient.fromTag(ItemTags.LOGS))
+                .key('X', Ingredient.fromItems(Items.STICK))
+                .patternLine("U")
+                .patternLine("U")
+                .patternLine("X")
+                .addCriterion("hasItem", hasItem(ItemTags.LOGS)).build(consumer);
+
+        ShapedRecipeBuilder.shapedRecipe(ItemInit.TOOTH_MACE.get())
+                .key('U', Ingredient.fromTag(LostTag.Items.TOOTHS))
+                .key('X', Ingredient.fromItems(ItemInit.WOODEN_MACE.get()))
+                .patternLine("UUU")
+                .patternLine("UXU")
+                .patternLine("UUU")
+                .addCriterion("hasItem", hasItem(ItemInit.WOODEN_MACE.get())).build(consumer);
 
         //Cooking
         CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ItemInit.RAW_DAKOSAURUS_MEAT.get()), ItemInit.COOKED_DAKOSAURUS_MEAT.get(), 0.35F, 200)

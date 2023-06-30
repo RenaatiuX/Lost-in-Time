@@ -64,6 +64,8 @@ public class ItemInit {
             ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
     public static final RegistryObject<Item> DUCKWEED = ITEMS.register("duckweed",
             () -> new DuckWeedItem(BlockInit.DUCKWEED.get(), new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> AMBER = ITEMS.register("amber",
+            () -> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
 
     //Food
     public static final RegistryObject<Item> RAW_PELECANIMIMUS_MEAT = ITEMS.register("raw_pelecanimimus_meat",

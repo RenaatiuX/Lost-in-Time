@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lost:netherite_spear"
+      "lost:tooth_mace"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:netherite_ingot"
+            "item": "lost:wooden_mace"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lost:netherite_spear"
+        "recipe": "lost:tooth_mace"
       }
     }
   },

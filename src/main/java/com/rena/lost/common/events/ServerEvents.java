@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -23,6 +24,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,6 +50,16 @@ public class ServerEvents {
                 LivingEntity target = (LivingEntity) event.getTarget();
                 target.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 60, 0, false, true));
                 player.getCooldownTracker().setCooldown(heldItem.getItem(), 40);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        if (event.getState().getBlock() == BlockInit.ANCIENT_MOSS.get()) {
+            ItemStack itemStack = event.getPlayer().getHeldItemMainhand();
+            if (itemStack.getItem() == Items.SHEARS) {
+                event.setNewSpeed(event.getOriginalSpeed() * 5.0F);
             }
         }
     }

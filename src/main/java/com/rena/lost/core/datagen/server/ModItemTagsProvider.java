@@ -21,5 +21,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         //add more food here
         getOrCreateBuilder(LostTag.Items.RAW_FISHES).add(Items.SALMON).add(Items.COD).add(Items.TROPICAL_FISH).add(Items.PUFFERFISH).add(ItemInit.HYPSOCORMUS.get()).add(ItemInit.TEPEXICHTHYS.get());
         getOrCreateBuilder(LostTag.Items.COOKED_FISHES).add(Items.COOKED_SALMON).add(Items.COOKED_COD).add(ItemInit.COOKED_HYPSOCORMUS.get()).add(ItemInit.COOKED_TEPEXICHTHYS.get());
+
+        //add more item here
+        getOrCreateBuilder(LostTag.Items.TOOTHS).add(ItemInit.DAKOSAURUS_TOOTH.get());
     }
 }
