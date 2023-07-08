@@ -60,6 +60,8 @@ public class LostInTime {
         EntityInit.ENTITY_TYPES.register(modEventBus);
         TileEntityInit.TILE_ENTITIES.register(modEventBus);
         ContainerInit.CONTAINER_TYPES.register(modEventBus);
+        EffectInit.EFFECTS.register(modEventBus);
+        FeatureInit.FEATURE.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

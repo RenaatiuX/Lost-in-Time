@@ -3,6 +3,7 @@ package com.rena.lost.common.events;
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.entities.Sahonachelys;
 import com.rena.lost.core.init.BlockInit;
+import com.rena.lost.core.init.EffectInit;
 import com.rena.lost.core.init.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -63,5 +64,4 @@ public class ServerEvents {
             }
         }
     }
-
 }

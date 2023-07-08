@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_rh",
+  "textures": {
+    "top": "lost:block/araucarioxylon_door_top",
+    "bottom": "lost:block/araucarioxylon_door_bottom"
+  }
+}

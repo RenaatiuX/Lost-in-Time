@@ -100,6 +100,7 @@ public class ModLootTableProvider extends LootTableProvider {
                     droppingItemWithFortune(voidite, ItemInit.VOIDITE_FRAGMENT.get()));
             this.registerLootTable(BlockInit.WEICHSELIA.get(), BlockLootTables::onlyWithShears);
             this.registerDropSelfLootTable(BlockInit.ANCIENT_MOSS.get());
+            this.registerLootTable(BlockInit.CONIOPTERIS.get(), BlockLootTables::onlyWithShears);
         }
 
 

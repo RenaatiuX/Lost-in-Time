@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "lost:block/voidite_crystal",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "lost:block/voidite_crystal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "lost:block/voidite_crystal",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "lost:block/voidite_crystal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "lost:block/voidite_crystal"
+    },
+    "facing=west": {
+      "model": "lost:block/voidite_crystal",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

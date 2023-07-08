@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "lost:block/araucarioxylon_leaves"
+  }
+}

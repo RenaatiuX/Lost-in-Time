@@ -80,6 +80,19 @@ public class BlockInit {
                     .setRequiresTool().hardnessAndResistance(2.0F, 3.0F)
                     .notSolid().setOpaque(BlockInit::isntSolid).setSuffocates(BlockInit::isntSolid).setBlocksVision(BlockInit::isntSolid)
                     .harvestTool(ToolType.PICKAXE).sound(SoundType.BONE)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_PLANKS = register("araucarioxylon_planks",
+            () -> new Block(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F)
+                    .sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_LEAVES = register("araucarioxylon_leaves",
+            () -> new LeavesBlock(AbstractBlock.Properties.create(Material.LEAVES)
+                    .hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT)
+                    .notSolid().setSuffocates(BlockInit::isntSolid).setBlocksVision(BlockInit::isntSolid)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_LOG = register("araucarioxylon_log",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD)
+                    .hardnessAndResistance(2.0F).sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_DOOR = register("araucarioxylon_door",
+            () -> new DoorBlock(AbstractBlock.Properties.create(Material.WOOD, ARAUCARIOXYLON_PLANKS.get().getMaterialColor())
+                    .hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), LostItemGroup.LOST_TAB);
 
     public static final RegistryObject<Block> DUCKWEED = BLOCKS.register("duckweed",
             () -> new DuckWeedBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
@@ -90,7 +103,7 @@ public class BlockInit {
     public static final RegistryObject<Block> APIOCRINUS = register("apiocrinus",
             () -> new ApiocrinusBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
                     .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
-    public static final RegistryObject<Block>  CLADOPHLEBIS = register("cladophlebis",
+    public static final RegistryObject<Block> CLADOPHLEBIS = register("cladophlebis",
             () -> new LostFlowerPlantBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
                     .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> QUILLWORT_1 = register("quillwort_1",
@@ -113,17 +126,26 @@ public class BlockInit {
     public static final RegistryObject<Block> ANCIENT_MOSS = register("ancient_moss",
             () -> new Block(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F)
                     .sound(SoundType.PLANT).notSolid()), LostItemGroup.LOST_TAB);
-
+    public static final RegistryObject<Block> CONIOPTERIS = register("coniopteris",
+            () -> new LostFlowerPlantBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> VOIDITE_CRYSTAL = register("voidite_crystal_block",
+            () -> new VoiditeCrystalBlock(AbstractBlock.Properties.create(Material.GLASS).notSolid().sound(SoundType.GLASS)
+                    .hardnessAndResistance(1.5F)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> VOIDITE_PILLAR = register("voidite_pillar",
+            () -> new Block(AbstractBlock.Properties.create(Material.GLASS)
+                    .setRequiresTool().hardnessAndResistance(0.8F)), LostItemGroup.LOST_TAB);
     private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
         return false;
     }
-    public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab){
+
+    public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab) {
         return register(name, blockSupplier, b -> new BlockItem(b, new Item.Properties().group(tab)));
     }
 
-    public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, Function<Block, Item> item){
+    public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, Function<Block, Item> item) {
         RegistryObject<T> block = BLOCKS.register(name, blockSupplier);
-        ItemInit.ITEMS.register(name,  () -> item.apply(block.get()));
+        ItemInit.ITEMS.register(name, () -> item.apply(block.get()));
         return block;
     }
 }

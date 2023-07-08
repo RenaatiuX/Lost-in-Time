@@ -3,6 +3,7 @@ package com.rena.lost.common.world.gen;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.common.BiomeDictionary;
@@ -27,7 +28,12 @@ public class LostOverworldGeneration {
             base.add(() -> LostConfiguredFeatures.PATCH_QUILLWORT_2);
             base.add(() -> LostConfiguredFeatures.DISK_MUD);
         }
+
+        if (key == Biomes.END_MIDLANDS) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.SURFACE_STRUCTURES);
+
+            base.add(() -> LostConfiguredFeatures.VOIDITE_PILLAR);
+        }
     }
-
-
 }
