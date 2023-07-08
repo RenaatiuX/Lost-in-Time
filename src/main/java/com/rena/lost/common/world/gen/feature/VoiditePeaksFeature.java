@@ -32,14 +32,17 @@ public class VoiditePeaksFeature extends Feature<NoFeatureConfig> {
         for (int i = 0; i < height; i++) {
             int sideBlock = rand.nextInt(3) + 1;
             for (int j = 0; j < sideBlock; j++) {
-                BlockPos sidePos = pos.add(rand.nextInt(3) - 1, i, rand.nextInt(3) - 1);
-                if (reader.isAirBlock(sidePos)) {
-
-                    Direction sideDirection = Direction.UP;
-                    BlockPos blockpos = sidePos.offset(sideDirection.getOpposite());
-                    if (reader.getBlockState(blockpos).isSolidSide(reader, blockpos, sideDirection.getOpposite())) {
+                //defining the horizontal direction in which the crystal might spawn
+                Direction sideDirection = Direction.values()[rand.nextInt(Direction.values().length)];
+                BlockPos crystalPos = pos.offset(sideDirection).add(0, i, 0);
+                if (reader.isAirBlock(crystalPos)) {
+                    //goin back in opposite direction will make give us the pillarPos
+                    BlockPos pillarPos = crystalPos.offset(sideDirection.getOpposite());
+                    //checking whether the pillar has a full face there
+                    if (reader.getBlockState(pillarPos).isSolidSide(reader, pillarPos, sideDirection.getOpposite())) {
+                        //spawwning the crystal with the correct facing, always away from the pillar
                         BlockState sideBlockState = BlockInit.VOIDITE_CRYSTAL.get().getDefaultState().with(BlockStateProperties.FACING, sideDirection);
-                        reader.setBlockState(sidePos, sideBlockState, 2);
+                        reader.setBlockState(crystalPos, sideBlockState, 2);
                     }
                 }
             }
