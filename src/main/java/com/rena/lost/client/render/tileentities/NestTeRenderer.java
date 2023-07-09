@@ -1,4 +1,4 @@
-package com.rena.lost.client.render;
+package com.rena.lost.client.render.tileentities;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.rena.lost.common.tileentities.NestBlockTe;

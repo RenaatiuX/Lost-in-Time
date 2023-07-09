@@ -1,9 +1,9 @@
 package com.rena.lost.client.events;
 
 import com.rena.lost.LostInTime;
-import com.rena.lost.client.model.SahonachelysModel;
-import com.rena.lost.client.model.TepexichthysModel;
 import com.rena.lost.client.render.*;
+import com.rena.lost.client.render.tileentities.AmberTeRenderer;
+import com.rena.lost.client.render.tileentities.NestTeRenderer;
 import com.rena.lost.client.screens.NestScreen;
 import com.rena.lost.common.items.ConcavenatorMaskItem;
 import com.rena.lost.core.init.*;
@@ -49,6 +49,7 @@ public class ClientEvents {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SPEAR.get(), SpearRenderer::new);
 
         ClientRegistry.bindTileEntityRenderer(TileEntityInit.NEST_TE.get(), NestTeRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(TileEntityInit.AMBER_TE.get(), AmberTeRenderer::new);
 
         ScreenManager.registerFactory(ContainerInit.NEST_CONTAINER.get(), NestScreen::new);
     }

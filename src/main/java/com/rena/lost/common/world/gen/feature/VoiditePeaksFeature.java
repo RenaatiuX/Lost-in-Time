@@ -14,7 +14,7 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import java.util.Random;
 
 public class VoiditePeaksFeature extends Feature<NoFeatureConfig> {
-    private static final Direction[] DIRECTIONS = Direction.values();
+
     public VoiditePeaksFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
     }
