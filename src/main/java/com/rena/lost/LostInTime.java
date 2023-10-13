@@ -44,6 +44,7 @@ public class LostInTime {
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "lost";
     public static final String ARMOR_DIR = MOD_ID + ":textures/armor/";
+    public static boolean ENABLE_OVERWORLD_TREES = true;
 
     public LostInTime() {
         // Register the setup method for modloading

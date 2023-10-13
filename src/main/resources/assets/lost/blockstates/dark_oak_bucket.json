@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "lost:block/dark_oak_bucket"
+    },
+    "level=1": {
+      "model": "lost:block/template_bucket_stage_1"
+    },
+    "level=2": {
+      "model": "lost:block/template_bucket_stage_2"
+    },
+    "level=3": {
+      "model": "lost:block/template_bucket_stage_3"
+    }
+  }
+}

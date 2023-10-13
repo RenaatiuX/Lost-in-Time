@@ -11,12 +11,12 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
 
-public class TranquilizerTileEntity extends TileEntity implements ITickableTileEntity {
-    public TranquilizerTileEntity(TileEntityType<?> tileEntityTypeIn) {
+public class TranquilizerTe extends TileEntity implements ITickableTileEntity {
+    public TranquilizerTe(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
-    public TranquilizerTileEntity() {
+    public TranquilizerTe() {
         this(TileEntityInit.TRANQUILIZER.get());
     }
 

@@ -72,6 +72,7 @@ public class ClientEvents {
 
         RenderTypeLookup.setRenderLayer(BlockInit.ARAUCARIOXYLON_DOOR.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.ARAUCARIOXYLON_LEAVES.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.ARAUCARIOXYLON_SAPLING.get(), RenderType.getCutout());
 
         RenderTypeLookup.setRenderLayer(BlockInit.VOIDITE_CRYSTAL.get(), RenderType.getCutout());
     }

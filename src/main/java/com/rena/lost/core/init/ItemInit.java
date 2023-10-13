@@ -8,10 +8,7 @@ import com.rena.lost.common.items.util.LostArmorMaterial;
 import com.rena.lost.common.items.util.LostItemTier;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemTier;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -66,6 +63,7 @@ public class ItemInit {
             () -> new DuckWeedItem(BlockInit.DUCKWEED.get(), new Item.Properties().group(LostItemGroup.LOST_TAB)));
     public static final RegistryObject<Item> AMBER = ITEMS.register("amber",
             () -> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+
 
     //Food
     public static final RegistryObject<Item> RAW_PELECANIMIMUS_MEAT = ITEMS.register("raw_pelecanimimus_meat",

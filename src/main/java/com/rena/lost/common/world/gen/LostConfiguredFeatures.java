@@ -1,6 +1,7 @@
 package com.rena.lost.common.world.gen;
 
 import com.google.common.collect.ImmutableList;
+import com.rena.lost.common.world.gen.tree.ModTreeConfig;
 import com.rena.lost.core.init.BlockInit;
 import com.rena.lost.core.init.FeatureInit;
 import net.minecraft.block.Blocks;
@@ -8,6 +9,10 @@ import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 
 public class LostConfiguredFeatures {
 
@@ -26,4 +31,10 @@ public class LostConfiguredFeatures {
 
     public static final ConfiguredFeature<?, ?> VOIDITE_PILLAR = FeatureInit.VOIDITE_PILLAR.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
             .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).count(4);
+
+    public static final ConfiguredFeature<ModTreeConfig, ?> ARAUCARIOXYLON = FeatureInit.ARAUCARIOXYLON.get().withConfiguration(
+            new ModTreeConfig.Builder().setTrunkBlock(BlockInit.ARAUCARIOXYLON_LOG.get()).setLeavesBlock(BlockInit.ARAUCARIOXYLON_LEAVES.get()).setMaxHeight(35).setMinHeight(34).build());
+    public static final ConfiguredFeature<?, ?> ARAUCARIOXYLON_TREE = ARAUCARIOXYLON.withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(
+            new AtSurfaceWithExtraConfig(1, 0.3F, 2)));
+
 }

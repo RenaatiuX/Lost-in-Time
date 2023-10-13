@@ -2,10 +2,13 @@ package com.rena.lost.core.init;
 
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.blocks.*;
+import com.rena.lost.common.blocks.trees.AraucarioxylonTree;
 import com.rena.lost.common.group.LostItemGroup;
+import com.rena.lost.common.world.gen.tree.ModTreeSpawners;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.block.trees.OakTree;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -25,7 +28,10 @@ public class BlockInit {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LostInTime.MOD_ID);
 
-    public static final RegistryObject<NestBlock> NEST_BLOCK = register("nest", NestBlock::new, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> NEST_BLOCK = register("nest",
+            NestBlock::new, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> DARK_OAK_BUCKET = register("dark_oak_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
 
     public static final RegistryObject<Block> TRANQUILIZER = register("tranquilizer",
             () -> new TranquilizerBlock(AbstractBlock.Properties.create(Material.IRON)
@@ -80,6 +86,8 @@ public class BlockInit {
                     .setRequiresTool().hardnessAndResistance(2.0F, 3.0F)
                     .notSolid().setOpaque(BlockInit::isntSolid).setSuffocates(BlockInit::isntSolid).setBlocksVision(BlockInit::isntSolid)
                     .harvestTool(ToolType.PICKAXE).sound(SoundType.BONE)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_SAPLING = register("araucarioxylon_sapling",
+            () -> new BaseSaplingBlock(ModTreeSpawners.ARAUCARIOXYLON, AbstractBlock.Properties.from(Blocks.OAK_SAPLING)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> ARAUCARIOXYLON_PLANKS = register("araucarioxylon_planks",
             () -> new Block(AbstractBlock.Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2.0F, 3.0F)
                     .sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
@@ -137,6 +145,11 @@ public class BlockInit {
                     .setRequiresTool().hardnessAndResistance(0.8F)), LostItemGroup.LOST_TAB);
     private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
         return false;
+    }
+
+    public static ResinBucketBlock createResinBucketBlock() {
+        return new ResinBucketBlock(AbstractBlock.Properties.create(Material.WOOD)
+                .hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD));
     }
 
     public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, ItemGroup tab) {

@@ -1,0 +1,9 @@
+{
+  "parent": "lost:block/template_bucket",
+  "textures": {
+    "0": "lost:block/dark_oak_bucket_side",
+    "1": "lost:block/dark_oak_bucket_top",
+    "2": "minecraft:block/dark_oak_planks",
+    "particles": "lost:block/dark_oak_bucket_side"
+  }
+}
