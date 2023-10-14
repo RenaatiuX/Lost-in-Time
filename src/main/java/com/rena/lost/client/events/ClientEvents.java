@@ -75,6 +75,10 @@ public class ClientEvents {
         RenderTypeLookup.setRenderLayer(BlockInit.ARAUCARIOXYLON_SAPLING.get(), RenderType.getCutout());
 
         RenderTypeLookup.setRenderLayer(BlockInit.VOIDITE_CRYSTAL.get(), RenderType.getCutout());
+
+        RenderTypeLookup.setRenderLayer(FluidInit.RESIN_FLUID.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(FluidInit.RESIN_FLOWING.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(FluidInit.RESIN_BLOCK.get(), RenderType.getTranslucent());
     }
 
     private static void armorModel(){

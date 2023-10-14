@@ -123,5 +123,7 @@ public class ItemInit {
     public static final RegistryObject<Item> WOODEN_MACE = ITEMS.register("wooden_mace",
             () -> new SwordItem(LostItemTier.WOODEN_MACE, 3, -3.0F, new Item.Properties().group(LostItemGroup.LOST_TAB)));
 
+    //Buckets
 
+    public static final RegistryObject<BucketItem> RESIN_BUCKET = ITEMS.register("resin_bucket", () -> new BucketItem(FluidInit.RESIN_FLUID, new Item.Properties().group(LostItemGroup.LOST_TAB)));
 }

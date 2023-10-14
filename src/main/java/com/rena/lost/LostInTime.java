@@ -63,6 +63,7 @@ public class LostInTime {
         ContainerInit.CONTAINER_TYPES.register(modEventBus);
         EffectInit.EFFECTS.register(modEventBus);
         FeatureInit.FEATURE.register(modEventBus);
+        FluidInit.FLUIDS.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

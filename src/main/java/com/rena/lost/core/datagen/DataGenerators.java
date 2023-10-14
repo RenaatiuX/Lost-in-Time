@@ -1,10 +1,9 @@
 package com.rena.lost.core.datagen;
 
 import com.rena.lost.LostInTime;
-import com.rena.lost.core.datagen.server.ModBlockTagsProvider;
-import com.rena.lost.core.datagen.server.ModItemTagsProvider;
-import com.rena.lost.core.datagen.server.ModLootTableProvider;
-import com.rena.lost.core.datagen.server.ModRecipeProvider;
+import com.rena.lost.core.datagen.client.ModBlockStatesProvider;
+import com.rena.lost.core.datagen.client.ModItemModelsProvider;
+import com.rena.lost.core.datagen.server.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,11 +22,19 @@ public class DataGenerators {
 
         if (event.includeServer())
             gatherServerData(gen, helper);
+        if (event.includeClient()){
+            gatherClientData(gen, helper);
+        }
         try {
             gen.run();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void gatherClientData(DataGenerator gen, ExistingFileHelper helper){
+        gen.addProvider(new ModItemModelsProvider(gen, helper));
+        gen.addProvider(new ModBlockStatesProvider(gen, helper));
     }
 
     private static void gatherServerData(DataGenerator gen, ExistingFileHelper helper) {
@@ -36,5 +43,7 @@ public class DataGenerators {
         ModBlockTagsProvider blockTags = new ModBlockTagsProvider(gen, helper);
         gen.addProvider(blockTags);
         gen.addProvider(new ModItemTagsProvider(gen, blockTags, helper));
+        gen.addProvider(new ModLanguageProvider(gen));
+        gen.addProvider(new ModFluidTags(gen, helper));
     }
 }

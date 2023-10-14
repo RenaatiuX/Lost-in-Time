@@ -85,5 +85,7 @@
   "entity.lost.pelecanimimus": "Pelecanimimus",
   "entity.lost.mirarce": "Mirarce",
 
-  "tooltip.lost.concavenator_mask": "Grants strength"
+  "tooltip.lost.concavenator_mask": "Grants strength",
+
+  "fluid.lost.resin_block": "Resin"
 }

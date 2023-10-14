@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "lost:resin_fluid",
+    "lost:resin_flowing"
+  ]
+}
