@@ -104,6 +104,7 @@ public class LostInTime {
         };
         DispenserBlock.registerDispenseBehavior(ItemInit.TEPEXICHTHYS_BUCKET.get(), idispenseitembehavior1);
         DispenserBlock.registerDispenseBehavior(ItemInit.HYPSOCORMUS_BUCKET.get(), idispenseitembehavior1);
+        DispenserBlock.registerDispenseBehavior(ItemInit.DECAYED_HYPSOCORMUS_BUCKET.get(), idispenseitembehavior1);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

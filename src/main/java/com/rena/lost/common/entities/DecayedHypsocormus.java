@@ -187,7 +187,7 @@ public class DecayedHypsocormus extends WaterMobEntity implements IAnimatable, I
     }
 
     public ItemStack getFishBucket() {
-        return new ItemStack(ItemInit.HYPSOCORMUS_BUCKET.get());
+        return new ItemStack(ItemInit.DECAYED_HYPSOCORMUS_BUCKET.get());
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
