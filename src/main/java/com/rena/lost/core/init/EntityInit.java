@@ -23,12 +23,16 @@ public class EntityInit {
             ()-> EntityType.Builder.<Diplomoceras>create(Diplomoceras::new, EntityClassification.WATER_AMBIENT).size(0.5f, 0.5f).build("diplomoceras"));
     public static final RegistryObject<EntityType<Hypsocormus>> HYPSOCORMUS = ENTITY_TYPES.register("hypsocormus",
             ()-> EntityType.Builder.<Hypsocormus>create(Hypsocormus::new, EntityClassification.WATER_AMBIENT).size(0.5f, 0.5f).build("hypsocormus"));
+    public static final RegistryObject<EntityType<DecayedHypsocormus>> DECAYED_HYPSOCORMUS = ENTITY_TYPES.register("decayed_hypsocormus",
+            () -> EntityType.Builder.<DecayedHypsocormus>create(DecayedHypsocormus::new, EntityClassification.MONSTER).size(0.3F, 0.5F).build("decayed_hypsocormus"));
     public static final RegistryObject<EntityType<Tepexichthys>> TEPEXICHTHYS = ENTITY_TYPES.register("tepexichthys",
             ()-> EntityType.Builder.<Tepexichthys>create(Tepexichthys::new, EntityClassification.WATER_AMBIENT).size(0.5f, 0.5f).build("tepexichthys"));
     public static final RegistryObject<EntityType<Pelecanimimus>> PELECANIMIMUS = ENTITY_TYPES.register("pelecanimimus",
             ()-> EntityType.Builder.<Pelecanimimus>create(Pelecanimimus::new, EntityClassification.CREATURE).size(0.7F, 1.3F).trackingRange(10).build("pelecanimimus"));
     public static final RegistryObject<EntityType<Mirarce>> MIRARCE = ENTITY_TYPES.register("mirarce",
             ()-> EntityType.Builder.<Mirarce>create(Mirarce::new, EntityClassification.CREATURE).size(0.7F, 1.0F).trackingRange(10).build("mirarce"));
+    public static final RegistryObject<EntityType<EnderSnarler>> ENDER_SNARLER = ENTITY_TYPES.register("ender_snarler",
+            ()-> EntityType.Builder.<EnderSnarler>create(EnderSnarler::new, EntityClassification.MONSTER).size(0.7F, 1.0F).trackingRange(8).build("ender_snarler"));
 
     //Projectiles
     public static final RegistryObject<EntityType<CustomEggEntity>> CUSTOM_EGG = ENTITY_TYPES.register("custom_egg",

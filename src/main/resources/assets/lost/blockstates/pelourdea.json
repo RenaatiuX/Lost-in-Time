@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "lost:block/pelourdea_bottom"
+    },
+    "half=upper": {
+      "model": "lost:block/pelourdea_top"
+    }
+  }
+}

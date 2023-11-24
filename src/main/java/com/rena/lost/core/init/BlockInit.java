@@ -120,6 +120,9 @@ public class BlockInit {
     public static final RegistryObject<Block> QUILLWORT_2 = register("quillwort_2",
             () -> new QuillwortBlock(AbstractBlock.Properties.create(Material.SEA_GRASS).doesNotBlockMovement()
                     .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> PELOURDEA = register("pelourdea",
+            () -> new DoublePlantBlock(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement()
+                    .zeroHardnessAndResistance().sound(SoundType.PLANT)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> SEIROCRINUS = register("seirocrinus",
             () -> new SeirocrinusTopBlock(AbstractBlock.Properties.create(Material.OCEAN_PLANT)
                     .doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.WET_GRASS)

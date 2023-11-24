@@ -43,6 +43,8 @@ public class ClientEvents {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.TEPEXICHTHYS.get(), TepexichthysRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.PELECANIMIMUS.get(), PelecanimimusRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MIRARCE.get(), MirarceRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.ENDER_SNARLER.get(), EnderSnarlerRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.DECAYED_HYPSOCORMUS.get(), DecayedHypsocormusRenderer::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.CUSTOM_EGG.get(), manager -> new SpriteRenderer<>(manager, itemRendererIn));
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.MUD_BALL.get(), manager -> new SpriteRenderer<>(manager, itemRendererIn));
@@ -67,6 +69,7 @@ public class ClientEvents {
         RenderTypeLookup.setRenderLayer(BlockInit.SEIROCRINUS_PLANT.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.WEICHSELIA.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.CONIOPTERIS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.PELOURDEA.get(), RenderType.getCutout());
 
         RenderTypeLookup.setRenderLayer(BlockInit.AMBER_BLOCK.get(), RenderType.getTranslucent());
 

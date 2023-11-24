@@ -1,5 +1,9 @@
 package com.rena.lost.common.effects;
 
+import com.rena.lost.client.particles.BloodParticle;
+import com.rena.lost.core.init.ParticleInit;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -20,6 +24,17 @@ public class BleedingEffect extends Effect {
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
 
+        entityLivingBaseIn.attackEntityFrom(DamageSource.MAGIC, 1.0F);
+
+        if (entityLivingBaseIn.world.isRemote) {
+            double offsetX = entityLivingBaseIn.world.rand.nextGaussian() * 0.2;
+            double offsetY = entityLivingBaseIn.getHeight() - 0.1;
+            double offsetZ = entityLivingBaseIn.world.rand.nextGaussian() * 0.2;
+            entityLivingBaseIn.world.addParticle(ParticleInit.BLOOD_PARTICLE.get(),
+                    entityLivingBaseIn.getPosX() + offsetX, entityLivingBaseIn.getPosY() + offsetY,
+                    entityLivingBaseIn.getPosZ() + offsetZ,
+                    0.0, 0.0, 0.0);
+        }
     }
 
     @Override

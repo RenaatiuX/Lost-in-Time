@@ -64,6 +64,7 @@ public class LostInTime {
         EffectInit.EFFECTS.register(modEventBus);
         FeatureInit.FEATURE.register(modEventBus);
         FluidInit.FLUIDS.register(modEventBus);
+        ParticleInit.PARTICLES.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -121,5 +122,7 @@ public class LostInTime {
         event.put(EntityInit.TEPEXICHTHYS.get(), Tepexichthys.createAttributes().create());
         event.put(EntityInit.PELECANIMIMUS.get(), Pelecanimimus.createAttributes().create());
         event.put(EntityInit.MIRARCE.get(), Mirarce.createAttributes().create());
+        event.put(EntityInit.ENDER_SNARLER.get(), EnderSnarler.createAttributes().create());
+        event.put(EntityInit.DECAYED_HYPSOCORMUS.get(), DecayedHypsocormus.createAttributes().create());
     }
 }
