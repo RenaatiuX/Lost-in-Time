@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,10 +29,10 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
-        entityRenderer();
-        registerBlockRenderer();
-        armorModel();
-        registerModelProperties();
+            entityRenderer();
+            registerBlockRenderer();
+            armorModel();
+            registerModelProperties();
     }
 
     private static void entityRenderer() {
@@ -70,6 +71,7 @@ public class ClientEvents {
         RenderTypeLookup.setRenderLayer(BlockInit.WEICHSELIA.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.CONIOPTERIS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.PELOURDEA.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.ARAUCARIOXYLON_TRAPDOOR.get(), RenderType.getCutout());
 
         RenderTypeLookup.setRenderLayer(BlockInit.AMBER_BLOCK.get(), RenderType.getTranslucent());
 

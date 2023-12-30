@@ -98,10 +98,19 @@ public class BlockInit {
     public static final RegistryObject<Block> ARAUCARIOXYLON_LOG = register("araucarioxylon_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD)
                     .hardnessAndResistance(2.0F).sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> STRIPPED_ARAUCARIOXYLON_LOG = register("stripped_araucarioxylon_log",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD)
+                    .hardnessAndResistance(2.0F).sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> ARAUCARIOXYLON_DOOR = register("araucarioxylon_door",
             () -> new DoorBlock(AbstractBlock.Properties.create(Material.WOOD, ARAUCARIOXYLON_PLANKS.get().getMaterialColor())
                     .hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), LostItemGroup.LOST_TAB);
-
+    public static final RegistryObject<Block> ARAUCARIOXYLON_TRAPDOOR = register("araucarioxylon_trapdoor",
+            () -> new TrapDoorBlock(AbstractBlock.Properties.create(Material.WOOD)
+                    .hardnessAndResistance(3.0F).sound(SoundType.WOOD).notSolid()), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_SIGN = BLOCKS.register("araucarioxylon_sign",
+            () -> new LostStandingSignBlock(AbstractBlock.Properties.create(Material.WOOD), LostWoodTypes.ARAUCARIOXYLON));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_WALL_SIGN = BLOCKS.register("araucarioxylon_wall_sign",
+            () -> new LostWallSignBlock(AbstractBlock.Properties.create(Material.WOOD), LostWoodTypes.ARAUCARIOXYLON));
     public static final RegistryObject<Block> DUCKWEED = BLOCKS.register("duckweed",
             () -> new DuckWeedBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
                     .zeroHardnessAndResistance().sound(SoundType.LILY_PADS).notSolid()));

@@ -88,7 +88,10 @@ public class ItemInit {
             ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.TEPEXICHTHYS)));
     public static final RegistryObject<Item> COOKED_TEPEXICHTHYS = ITEMS.register("cooked_tepexichthys",
             ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.COOKED_TEPEXICHTHYS)));
-
+    public static final RegistryObject<Item> DECAYED_HYPSOCORMUS = ITEMS.register("decayed_hypsocormus",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.DECAYED_HYPSOCORMUS)));
+    public static final RegistryObject<Item> COOKED_DECAYED_HYPSOCORMUS = ITEMS.register("cooked_decayed_hypsocormus",
+            ()-> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB).food(FoodInit.COOKED_DECAYED_HYPSOCORMUS)));
     //Armor
     public static final RegistryObject<Item> CONCAVENATOR_MASK =ITEMS.register("concavenator_mask",
             ()-> new ConcavenatorMaskItem(LostArmorMaterial.CONCAVENATOR, EquipmentSlotType.HEAD, new Item.Properties().group(LostItemGroup.LOST_TAB)));
@@ -129,7 +132,11 @@ public class ItemInit {
     public static final RegistryObject<Item> WOODEN_MACE = ITEMS.register("wooden_mace",
             () -> new SwordItem(LostItemTier.WOODEN_MACE, 3, -3.0F, new Item.Properties().group(LostItemGroup.LOST_TAB)));
 
-    //Buckets
+    //Blocks
 
-    public static final RegistryObject<BucketItem> RESIN_BUCKET = ITEMS.register("resin_bucket", () -> new BucketItem(FluidInit.RESIN_FLUID, new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<BucketItem> RESIN_BUCKET = ITEMS.register("resin_bucket",
+            () -> new BucketItem(FluidInit.RESIN_FLUID, new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> ARAUCARIOXYLON_SIGN = ITEMS.register("araucarioxylon_sign",
+            () -> new SignItem(new Item.Properties().maxStackSize(16).group(LostItemGroup.LOST_TAB),
+                    BlockInit.ARAUCARIOXYLON_SIGN.get(), BlockInit.ARAUCARIOXYLON_WALL_SIGN.get()));
 }

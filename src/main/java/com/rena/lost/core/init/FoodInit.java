@@ -20,5 +20,8 @@ public class FoodInit {
             .hunger(2).saturation(0.1F).build();
     public static final Food COOKED_TEPEXICHTHYS = new Food.Builder()
             .hunger(5).saturation(0.6F).build();
-
+    public static final Food DECAYED_HYPSOCORMUS = new Food.Builder()
+            .hunger(1).saturation(0.1F).build();
+    public static final Food COOKED_DECAYED_HYPSOCORMUS = new Food.Builder()
+            .hunger(7).saturation(0.6F).build();
 }

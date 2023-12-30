@@ -2,6 +2,7 @@ package com.rena.lost.core.init;
 
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.tileentities.AmberTe;
+import com.rena.lost.common.tileentities.LostSignTe;
 import com.rena.lost.common.tileentities.NestBlockTe;
 import com.rena.lost.common.tileentities.TranquilizerTe;
 import net.minecraft.tileentity.TileEntityType;
@@ -20,4 +21,8 @@ public class TileEntityInit {
             () -> TileEntityType.Builder.create(NestBlockTe::new, BlockInit.NEST_BLOCK.get()).build(null));
     public static final RegistryObject<TileEntityType<AmberTe>> AMBER_TE = TILE_ENTITIES.register("amber_te",
             () -> TileEntityType.Builder.create(AmberTe::new, BlockInit.AMBER_BLOCK.get()).build(null));
+    public static final RegistryObject<TileEntityType<LostSignTe>> SIGN_TE = TILE_ENTITIES.register("sign",
+            () -> TileEntityType.Builder.create(LostSignTe::new,
+                    BlockInit.ARAUCARIOXYLON_SIGN.get(),
+                    BlockInit.ARAUCARIOXYLON_WALL_SIGN.get()).build(null));
 }

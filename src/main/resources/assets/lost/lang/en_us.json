@@ -42,6 +42,8 @@
   "item.lost.wooden_mace": "Wooden Mace",
   "item.lost.duckweed": "Duckweed",
   "item.lost.amber": "Amber",
+  "item.lost.decayed_hypsocormus": "Decayed Hypsocormus",
+  "item.lost.cooked_decayed_hypsocormus": "Cooked Decayed Hypsocormus",
 
   "block.lost.mud": "Mud",
   "block.lost.tranquilizer": "Tranquilizer",
@@ -79,6 +81,10 @@
   "block.lost.voidite_pillar": "Voidite Pillar",
   "block.lost.dark_oak_bucket": "Dark Oak Bucket",
   "block.lost.araucarioxylon_sapling": "Araucarioxylon Sapling",
+  "block.lost.stripped_araucarioxylon_log": "Stripped Araucarioxylon Log",
+  "block.lost.araucarioxylon_trapdoor": "Araucarioxylon Trapdoor",
+  "block.lost.araucarioxylon_sign": "Araucarioxylon Sign",
+  "block.lost.araucarioxylon_wall_sign": "Araucarioxylon Wall Sign",
 
   "entity.lost.sahonachelys": "Sahonachelys",
   "entity.lost.dakosaurus": "Dakosaurus",
