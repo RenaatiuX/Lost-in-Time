@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "lost:block/araucarioxylon_log",
+    "side": "lost:block/araucarioxylon_log"
+  }
+}

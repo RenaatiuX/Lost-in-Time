@@ -1,0 +1,10 @@
+{
+  "parent": "lost:block/template_bucket_stage_3",
+  "textures": {
+    "0": "lost:block/jungle_bucket_side",
+    "1": "lost:block/jungle_bucket_top",
+    "2": "minecraft:block/jungle_planks",
+    "3": "minecraft:block/water_still",
+    "particles": "lost:block/jungle_bucket_side"
+  }
+}

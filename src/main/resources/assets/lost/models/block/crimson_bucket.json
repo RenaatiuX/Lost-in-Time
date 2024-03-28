@@ -1,0 +1,9 @@
+{
+  "parent": "lost:block/template_bucket",
+  "textures": {
+    "0": "lost:block/crimson_bucket_side",
+    "1": "lost:block/crimson_bucket_top",
+    "2": "minecraft:block/crimson_planks",
+    "particles": "lost:block/crimson_bucket_side"
+  }
+}

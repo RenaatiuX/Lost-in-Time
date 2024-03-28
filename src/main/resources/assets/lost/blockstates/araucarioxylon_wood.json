@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "lost:block/araucarioxylon_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "lost:block/araucarioxylon_wood"
+    },
+    "axis=z": {
+      "model": "lost:block/araucarioxylon_wood",
+      "x": 90
+    }
+  }
+}

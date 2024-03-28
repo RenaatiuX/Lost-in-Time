@@ -69,6 +69,8 @@ public class ItemInit {
             () -> new DuckWeedItem(BlockInit.DUCKWEED.get(), new Item.Properties().group(LostItemGroup.LOST_TAB)));
     public static final RegistryObject<Item> AMBER = ITEMS.register("amber",
             () -> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
+    public static final RegistryObject<Item> END_SNARLER_SALIVA = ITEMS.register("end_snarler_saliva",
+            () -> new Item(new Item.Properties().group(LostItemGroup.LOST_TAB)));
 
 
     //Food
@@ -131,7 +133,6 @@ public class ItemInit {
             () -> new SwordItem(LostItemTier.TOOTH_MACE, 3, -3.0F, new Item.Properties().group(LostItemGroup.LOST_TAB)));
     public static final RegistryObject<Item> WOODEN_MACE = ITEMS.register("wooden_mace",
             () -> new SwordItem(LostItemTier.WOODEN_MACE, 3, -3.0F, new Item.Properties().group(LostItemGroup.LOST_TAB)));
-
     //Blocks
 
     public static final RegistryObject<BucketItem> RESIN_BUCKET = ITEMS.register("resin_bucket",

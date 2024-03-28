@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
 	"textures": {
 		"0": "#0",
 		"1": "#1",
@@ -73,8 +74,8 @@
 			"to": [15, 8.025, 15],
 			"color": 5,
 			"faces": {
-				"up": {"uv": [1, 1, 15, 15], "texture": "#3"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#3"}
+				"up": {"uv": [1, 1, 15, 15], "texture": "#3", "tintindex": 0, "cullface": "up"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#3", "tintindex": 0, "cullface": "up"}
 			}
 		}
 	],

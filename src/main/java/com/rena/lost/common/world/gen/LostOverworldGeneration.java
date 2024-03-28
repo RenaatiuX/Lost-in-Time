@@ -17,23 +17,12 @@ public class LostOverworldGeneration {
 
     public static void generate(final BiomeLoadingEvent event) {
         RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
-        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
-
-        if(types.contains(BiomeDictionary.Type.SWAMP)) {
-            List<Supplier<ConfiguredFeature<?, ?>>> base =
-                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
-
-            base.add(() -> LostConfiguredFeatures.PATCH_DUCKWEED);
-            base.add(() -> LostConfiguredFeatures.PATCH_QUILLWORT_1);
-            base.add(() -> LostConfiguredFeatures.PATCH_QUILLWORT_2);
-            base.add(() -> LostConfiguredFeatures.DISK_MUD);
-        }
 
         if (key == Biomes.END_MIDLANDS) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStage.Decoration.SURFACE_STRUCTURES);
 
-            base.add(() -> LostConfiguredFeatures.VOIDITE_PILLAR);
+            base.add(LostConfiguredFeatures.VOIDITE_PILLAR);
         }
     }
 }

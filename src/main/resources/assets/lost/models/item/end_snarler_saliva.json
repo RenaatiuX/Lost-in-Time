@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lost:item/end_snarler_saliva_bottle"
+  }
+}

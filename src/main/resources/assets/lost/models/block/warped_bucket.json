@@ -1,0 +1,9 @@
+{
+  "parent": "lost:block/template_bucket",
+  "textures": {
+    "0": "lost:block/warped_bucket_side",
+    "1": "lost:block/warped_bucket_top",
+    "2": "minecraft:block/warped_planks",
+    "particles": "lost:block/warped_bucket_side"
+  }
+}

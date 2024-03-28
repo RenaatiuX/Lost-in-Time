@@ -1,0 +1,10 @@
+{
+  "parent": "lost:block/template_bucket_stage_2",
+  "textures": {
+    "0": "lost:block/warped_bucket_side",
+    "1": "lost:block/warped_bucket_top",
+    "2": "minecraft:block/warped_planks",
+    "3": "minecraft:block/water_sill",
+    "particles": "lost:block/warped_bucket_side"
+  }
+}

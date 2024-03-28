@@ -1,14 +1,10 @@
 package com.rena.lost;
 
-import com.google.common.collect.ImmutableMap;
 import com.rena.lost.common.blocks.LostWoodTypes;
 import com.rena.lost.common.entities.*;
 import com.rena.lost.common.entities.misc.CustomEggEntity;
 import com.rena.lost.common.entities.misc.MudBallEntity;
 import com.rena.lost.core.init.*;
-import jdk.nashorn.internal.ir.annotations.Immutable;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.renderer.Atlases;
@@ -16,8 +12,6 @@ import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.dispenser.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.SnowballEntity;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,30 +20,23 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
-import java.util.stream.Collectors;
 
 @Mod(LostInTime.MOD_ID)
 public class LostInTime {
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "lost";
     public static final String ARMOR_DIR = MOD_ID + ":textures/armor/";
     public static boolean ENABLE_OVERWORLD_TREES = true;
@@ -62,17 +49,17 @@ public class LostInTime {
         modEventBus.addListener(this::registerEntityAttributes);
         GeckoLib.initialize();
 
-        MinecraftForge.EVENT_BUS.register(this);
-
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
         EntityInit.ENTITY_TYPES.register(modEventBus);
         TileEntityInit.TILE_ENTITIES.register(modEventBus);
         ContainerInit.CONTAINER_TYPES.register(modEventBus);
         EffectInit.EFFECTS.register(modEventBus);
-        FeatureInit.FEATURE.register(modEventBus);
         FluidInit.FLUIDS.register(modEventBus);
         ParticleInit.PARTICLES.register(modEventBus);
+        BiomeInit.BIOMES.register(modEventBus);
+        FeatureInit.FEATURE.register(modEventBus);
+        SurfaceBuilderInit.SURFACE_BUILDERS.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

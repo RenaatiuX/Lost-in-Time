@@ -32,6 +32,20 @@ public class BlockInit {
             NestBlock::new, LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> DARK_OAK_BUCKET = register("dark_oak_bucket",
             BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ACACIA_BUCKET = register("acacia_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> BIRCH_BUCKET = register("birch_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> CRIMSON_BUCKET = register("crimson_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> JUNGLE_BUCKET = register("jungle_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> OAK_BUCKET = register("oak_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> SPRUCE_BUCKET = register("spruce_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> WARPED_BUCKET = register("warped_bucket",
+            BlockInit::createResinBucketBlock, LostItemGroup.LOST_TAB);
 
     public static final RegistryObject<Block> TRANQUILIZER = register("tranquilizer",
             () -> new TranquilizerBlock(AbstractBlock.Properties.create(Material.IRON)
@@ -98,6 +112,9 @@ public class BlockInit {
     public static final RegistryObject<Block> ARAUCARIOXYLON_LOG = register("araucarioxylon_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD)
                     .hardnessAndResistance(2.0F).sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_WOOD = register("araucarioxylon_wood",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD)
+                    .hardnessAndResistance(2.0f).sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> STRIPPED_ARAUCARIOXYLON_LOG = register("stripped_araucarioxylon_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.create(Material.WOOD)
                     .hardnessAndResistance(2.0F).sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
@@ -111,6 +128,15 @@ public class BlockInit {
             () -> new LostStandingSignBlock(AbstractBlock.Properties.create(Material.WOOD), LostWoodTypes.ARAUCARIOXYLON));
     public static final RegistryObject<Block> ARAUCARIOXYLON_WALL_SIGN = BLOCKS.register("araucarioxylon_wall_sign",
             () -> new LostWallSignBlock(AbstractBlock.Properties.create(Material.WOOD), LostWoodTypes.ARAUCARIOXYLON));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_BUTTON = register("araucarioxylon_button",
+            () -> new WoodButtonBlock(AbstractBlock.Properties.create(Material.WOOD)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_PRESSURE_PLATE = register("araucarioxylon_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, AbstractBlock.Properties
+                    .create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(0.5F).doesNotBlockMovement()
+                    .sound(SoundType.WOOD)), LostItemGroup.LOST_TAB);
+    public static final RegistryObject<Block> ARAUCARIOXYLON_STAIRS = register("araucarioxylon_stairs",
+            () -> new StairsBlock(() -> ARAUCARIOXYLON_PLANKS.get().getDefaultState(), AbstractBlock.Properties
+                    .from(ARAUCARIOXYLON_PLANKS.get())), LostItemGroup.LOST_TAB);
     public static final RegistryObject<Block> DUCKWEED = BLOCKS.register("duckweed",
             () -> new DuckWeedBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement()
                     .zeroHardnessAndResistance().sound(SoundType.LILY_PADS).notSolid()));
@@ -155,6 +181,7 @@ public class BlockInit {
     public static final RegistryObject<Block> VOIDITE_PILLAR = register("voidite_pillar",
             () -> new Block(AbstractBlock.Properties.create(Material.GLASS)
                     .setRequiresTool().hardnessAndResistance(0.8F)), LostItemGroup.LOST_TAB);
+
     private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
         return false;
     }

@@ -2,6 +2,7 @@ package com.rena.lost.core.init;
 
 import com.rena.lost.LostInTime;
 import com.rena.lost.common.effects.BleedingEffect;
+import com.rena.lost.common.effects.DecayEffect;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraftforge.fml.RegistryObject;
@@ -14,5 +15,7 @@ public class EffectInit {
 
     public static final RegistryObject<Effect> BLEEDING = EFFECTS.register("bleeding",
             () -> new BleedingEffect(EffectType.HARMFUL, 16711680));
+    public static final RegistryObject<Effect> DECAY = EFFECTS.register("decay",
+            () -> new DecayEffect(EffectType.HARMFUL, 16711680));
 
 }

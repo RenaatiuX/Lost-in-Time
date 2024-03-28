@@ -12,6 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class FeatureInit {
 
+
     public static final DeferredRegister<Feature<?>> FEATURE = DeferredRegister.create(ForgeRegistries.FEATURES, LostInTime.MOD_ID);
 
     public static final RegistryObject<Feature<NoFeatureConfig>> VOIDITE_PILLAR = FEATURE.register("voidite_pillar",

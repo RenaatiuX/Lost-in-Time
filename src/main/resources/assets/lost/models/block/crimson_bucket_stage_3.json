@@ -1,0 +1,10 @@
+{
+  "parent": "lost:block/template_bucket_stage_3",
+  "textures": {
+    "0": "lost:block/crimson_bucket_side",
+    "1": "lost:block/crimson_bucket_top",
+    "2": "minecraft:block/crimson_planks",
+    "3": "minecraft:block/water_still",
+    "particles": "lost:block/crimson_bucket_side"
+  }
+}

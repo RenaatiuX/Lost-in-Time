@@ -1,20 +1,10 @@
 package com.rena.lost.common.effects;
 
-import com.rena.lost.client.particles.BloodParticle;
 import com.rena.lost.core.init.ParticleInit;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.vector.Vector3d;
-
-import java.util.UUID;
 
 public class BleedingEffect extends Effect {
     public BleedingEffect(EffectType typeIn, int liquidColorIn) {

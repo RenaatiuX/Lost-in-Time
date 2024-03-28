@@ -27,7 +27,9 @@ public class LostISTER extends ItemStackTileEntityRenderer {
 
     @Override
     public void func_239207_a_(ItemStack stack, ItemCameraTransforms.TransformType p_239207_2_, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
-        if (stack.getItem() == ItemInit.DIAMOND_SPEAR.get() || stack.getItem() == ItemInit.GOLD_SPEAR.get() || stack.getItem() == ItemInit.STONE_SPEAR.get() || stack.getItem() == ItemInit.IRON_SPEAR.get() || stack.getItem() == ItemInit.WOODEN_SPEAR.get() || stack.getItem() == ItemInit.NETHERITE_SPEAR.get()) {
+        if (stack.getItem() == ItemInit.DIAMOND_SPEAR.get() || stack.getItem() == ItemInit.GOLD_SPEAR.get() ||
+                stack.getItem() == ItemInit.STONE_SPEAR.get() || stack.getItem() == ItemInit.IRON_SPEAR.get() ||
+                stack.getItem() == ItemInit.WOODEN_SPEAR.get() || stack.getItem() == ItemInit.NETHERITE_SPEAR.get()) {
             matrixStack.translate(0.5F, 0.5F, 0.5F);
             if (p_239207_2_ == ItemCameraTransforms.TransformType.GUI || p_239207_2_ == ItemCameraTransforms.TransformType.FIXED || p_239207_2_ == ItemCameraTransforms.TransformType.NONE || p_239207_2_ == ItemCameraTransforms.TransformType.GROUND) {
                 ItemStack tridentInventory = null;
@@ -60,8 +62,7 @@ public class LostISTER extends ItemStackTileEntityRenderer {
     }
 
 
-
-    private static ResourceLocation spear(String name){
+    private static ResourceLocation spear(String name) {
         return LostInTime.modLoc("textures/entity/" + name);
     }
 }

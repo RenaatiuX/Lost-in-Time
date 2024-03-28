@@ -1,0 +1,9 @@
+{
+  "parent": "lost:block/template_bucket",
+  "textures": {
+    "0": "lost:block/acacia_bucket_side",
+    "1": "lost:block/acacia_bucket_top",
+    "2": "minecraft:block/acacia_planks",
+    "particles": "lost:block/acacia_bucket_side"
+  }
+}

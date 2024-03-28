@@ -11,7 +11,7 @@ public class ModTreeSpawners {
     public static final TreeSpawner ARAUCARIOXYLON = new TreeSpawner() {
         @Nullable
         public ConfiguredFeature<ModTreeConfig, ?> getTreeFeature(Random random) {
-            return LostConfiguredFeatures.ARAUCARIOXYLON;
+            return LostConfiguredFeatures.ARAUCARIOXYLON.get();
         }
     };
 
